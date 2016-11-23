@@ -26,10 +26,11 @@ CREATE TABLE AdminUser (
 );
 
 CREATE TABLE Product (
-	pid INTEGER NOT NULL,
+	pid INTEGER IDENTITY NOT NULL,
 	cost DECIMAL(10,2),
 	pname VARCHAR(50),
 	description VARCHAR(250),
+	image VARCHAR(100),
 	PRIMARY KEY (pid)
 );
 
