@@ -26,7 +26,7 @@ CREATE TABLE AdminUser (
 );
 
 CREATE TABLE Product (
-	pid INTEGER IDENTITY NOT NULL,
+	pid INTEGER AUTO_INCREMENT,
 	cost DECIMAL(10,2),
 	pname VARCHAR(50),
 	description VARCHAR(250),
