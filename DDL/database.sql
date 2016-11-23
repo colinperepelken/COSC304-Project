@@ -50,9 +50,9 @@ CREATE TABLE Stores (
 	wid INTEGER NOT NULL,
 	pid INTEGER NOT NULL,
 	PRIMARY KEY (wid, pid),
-	FOREIGN KEY (wid) REFERENCES Warehouse(wid),
+	FOREIGN KEY (wid) REFERENCES Warehouse(wid)
 		ON DELETE CASCADE -- if warehouse deleted then remove from Stores
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE CASCADE -- if a product is deleted then remove from Stores
 		ON UPDATE CASCADE
