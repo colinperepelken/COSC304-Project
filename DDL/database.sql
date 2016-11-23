@@ -99,9 +99,9 @@ CREATE TABLE CustomerOrder (
 	FOREIGN KEY (shippingType) REFERENCES ShippingOption(shippingType)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
-	FOREIGN KEY (paymentType) REFERENCES PaymentOption(paymentType)
+	FOREIGN KEY (paymentType) REFERENCES PaymentMethod(paymentType)
 		ON DELETE NO ACTION
-		ON UPDATE NO ACTION,
+		ON UPDATE NO ACTION
 );
 
 CREATE TABLE HasProduct (
@@ -109,9 +109,9 @@ CREATE TABLE HasProduct (
 	pid INTEGER NOT NULL,
 	quantity INTEGER,
 	PRIMARY KEY (oid, pid),
-	FOREIGN KEY (oid) REFERENCES CustomerOrder(oid),
+	FOREIGN KEY (oid) REFERENCES CustomerOrder(oid)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
@@ -119,10 +119,10 @@ CREATE TABLE HasProduct (
 
 CREATE TABLE ShippingOption (
 	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
-	PRIMARY KEY (shippingType),
+	PRIMARY KEY (shippingType)
 );
 
 CREATE TABLE PaymentMethod (
 	paymentType VARCHAR(20) CHECK (paymentType IN ('Paypal', 'VISA', 'Mastercard')),
-	PRIMARY KEY (paymentType),
+	PRIMARY KEY (paymentType)
 );
