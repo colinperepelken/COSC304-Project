@@ -5,11 +5,11 @@
 </head>
 <body>
 
-<h1>Search for merchandise.</h1>
+<h1>2Kyle16 Offical Merchandise</h1>
 
 <form method="get" action="listproducts.php">
 <input type="text" name="productName" size="50">
-<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
+<input type="submit" value="Submit"> (Leave blank for all products)
 </form>
 
 <?php
@@ -24,7 +24,7 @@
 	}
 	
 	$hasParam = false;
-	$query = "SELECT pid, pname FROM Product";
+	$query = "SELECT cost, pname, image FROM Product";
 	
 	if($name == "") {
 		echo "<h2>All Products</h2>";
@@ -54,11 +54,11 @@
 		if($hasParam) $stmt->bind_param("s", $name); // bind param
 		$stmt->execute(); // execute statement
 		
-		$stmt->bind_result($id, $name); // bind result variables
+		$stmt->bind_result($cost, $name, $image); // bind result variables
 		
 		echo "<table>";
 		while($stmt->fetch()) {
-			echo "<tr><td>$id</td><td>$name</td></tr>";
+			echo "<tr><td><img src=\"http://cosc304.ok.ubc.ca/group6/tomcat/images/products/$image\" alt=\"Product Image\"><p><b>$name</b></p><p>\$$cost</p></td></tr>";
 		}
 		echo "</table>";			
 	}
