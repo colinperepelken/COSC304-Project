@@ -7,9 +7,16 @@
 
 <h1>2Kyle16 Offical Merchandise</h1>
 
+<form action="index.html">
+	<input type="submit" value="Home" />
+</form>
+
+<p></p>
+<p></p>
+
 <form method="get" action="listproducts.php">
-<input type="text" name="productName" size="50">
-<input type="submit" value="Submit"> (Leave blank for all products)
+	<input type="text" name="productName" size="50">
+	<input type="submit" value="Submit"> (Leave blank for all products)
 </form>
 
 <?php

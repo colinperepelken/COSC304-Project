@@ -7,7 +7,7 @@
 
 -- a registered user (must have an account to place an order)
 CREATE TABLE AccountHolder (
-	cid INTEGER NOT NULL,
+	cid INTEGER AUTO_INCREMENT,
 	username VARCHAR(12) NOT NULL UNIQUE,
 	password VARCHAR(15) NOT NULL,
 	email VARCHAR(254),
@@ -18,7 +18,7 @@ CREATE TABLE AccountHolder (
 
 -- Sublass of AccountHolder
 CREATE TABLE AdminUser (
-	cid INTEGER NOT NULL,
+	cid INTEGER AUTO_INCREMENT,
 	PRIMARY KEY (cid),
 	FOREIGN KEY (cid) REFERENCES AccountHolder(cid)
 		ON DELETE CASCADE -- delete in Admin if account holder is deleted.
