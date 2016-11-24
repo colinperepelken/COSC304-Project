@@ -14,10 +14,11 @@
 </form>
 
 <?php
-	ini_set('display_errors', 1); // display errors
+	error_reporting(-1); // report all PHP errors 
+	ini_set('display_errors', 1);
 	
-	/* Read in parameters */
-	if(isset($_GET["username"])&&isset($_GET(["password"]) {
+	if(!empty($_GET["username"]) && !empty($_GET["password"])) {
+		/* Read in parameters */
 		$username = $_GET["username"];
 		$password = $_GET["password"];
 		
@@ -53,17 +54,16 @@
 			if($count == 1) {
 				header("location: welcome.html"); // redirect browser to welcome page
 			} else {
-				echo "Your Username or Password is invalid."
+				echo "Your Username or Password is invalid.";
 			}
 		}
 		
 		
-		
-		
+		/*******************TODO: add code to check if user is an admin ***************/
 		
 		
 	} else { // if the user provided no input
-		echo "Please input a username and password."
+		echo "Please input a username and password.";
 	}
 	
 
