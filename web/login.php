@@ -9,8 +9,12 @@
 
 <form method="get" action="login.php">
 	<input type="text" name="username" size="12">
-	<input type="text" name="password" size="15">
+	<input type="password" name="password" size="15">
 	<input type="submit" value="Login">
+</form>
+<p></p>
+<form action="createacc.php">
+	<input type="submit" value="Create Account" />
 </form>
 
 <?php
@@ -57,7 +61,8 @@
 				echo "Your Username or Password is invalid.";
 			}
 		}
-		
+		$stmt->close();
+		$conn->close();
 		
 		/*******************TODO: add code to check if user is an admin ***************/
 		
