@@ -8,11 +8,13 @@
 <h1>Create Account</h1>
 
 <form method="get" action="createacc.php">
-	Username<input type="text" name="username" size="15">
-	Password<input type="password" name="password" size="15">
-	Email<input type="text" name="email" size="15">
-	Name<input type="text" name="name" size="15">
-	Date YYYY-MM-DD<input type="text" name="date" size="15">
+	<table>
+	<tr><td>Username</td><td><input type="text" name="username" size="15"></td></td>
+	<tr><td>Password</td><td><input type="password" name="password" size="15"></td></td>
+	<tr><td>Email</td><td><input type="text" name="email" size="15"></td></td>
+	<tr><td>Name</td><td><input type="text" name="name" size="15"></td></td>
+	<tr><td>Date YYYY-MM-DD</td><td><input type="text" name="date" size="15"></td></td>
+	</table>
 	<input type="submit" value="Create Account">
 </form>
 <p></p>

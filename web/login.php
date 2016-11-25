@@ -6,10 +6,13 @@
 <body>
 
 <h1>Login</h1>
-
+<form action="home.html">
+	<input type="submit" value="Home" />
+</form>
+<p></p>
 <form method="get" action="login.php">
-	<input type="text" name="username" size="12">
-	<input type="password" name="password" size="15">
+	Username <input type="text" name="username" size="15">
+	Password <input type="password" name="password" size="15">
 	<input type="submit" value="Login">
 </form>
 <p></p>
