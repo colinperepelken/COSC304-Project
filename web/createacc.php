@@ -50,6 +50,13 @@
 			echo "Failed to connect to server: " . $conn->connect_error;
 		}
 		
+		// INPUT VALIDATION
+		// name and username - strip symbols
+		// email - check format
+		// date - check format
+		// check length of all fields.
+		
+		
 		$stmt = $conn->stmt_init();
 		if(!$stmt->prepare($sql)) {
 			echo "Failed to prepare statement";

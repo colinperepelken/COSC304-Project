@@ -5,9 +5,10 @@
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
-
+<div class = "mainDiv"><div id = "header">header<br><br></div>
+<div class = "content">
 <h1>2Kyle16 Offical Merchandise</h1>
-
+<center>
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
@@ -37,13 +38,17 @@
 		$name = "";	// if search bar is blank
 	}
 	
+	// validation
+	// strip symbols from search
+	
+	
 	$hasParam = false;
 	$query = "SELECT cost, pname, image, inventory FROM Product";
 	
 	if($name == "") {
-		echo "<h2>All Products</h2>";
+		echo "<h1>All Products</h1>";
 	} else {
-		echo "<h2>Products containing '$name'</h2>";
+		echo "<h1>Products containing '$name'</h1>";
 		$query .= " WHERE pname LIKE ?";
 		$name = "%$name%";
 		$hasParam = true;
@@ -76,10 +81,12 @@
 			if($inventory=="0") {
 				$msg = "Out of Stock!";
 			} else {
-				$msg = "Add to Cart";
+				$msg = "<a href=\"home.html\">Add to Cart</a>";
 			}
 			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
 			<p><b>$name</b></p><p>\$$cost</p><p>$msg</p></td>";
+			echo $count%3==0?"</tr><tr>":""; // 3 per row
+ -			$count++;
 		}
 		echo "</tr></table>";			
 	}
@@ -87,6 +94,7 @@
 	$conn->close(); // close connection
 
 ?>
-
+</div></div>
+<div id = "footer"> bottom text </div>
 </body>
 </html>
