@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>2Kyle16 Store</title>
+<link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
 
@@ -37,7 +38,7 @@
 	}
 	
 	$hasParam = false;
-	$query = "SELECT cost, pname, image FROM Product";
+	$query = "SELECT cost, pname, image, inventory FROM Product";
 	
 	if($name == "") {
 		echo "<h2>All Products</h2>";
@@ -67,15 +68,18 @@
 		if($hasParam) $stmt->bind_param("s", $name); // bind param
 		$stmt->execute(); // execute statement
 		
-		$stmt->bind_result($cost, $name, $image); // bind result variables
+		$stmt->bind_result($cost, $name, $image, $inventory); // bind result variables
 		
 		echo "<table><tr>";
 		$count = 1;
 		while($stmt->fetch()) {
+			if($inventory=="0") {
+				$msg = "Out of Stock!";
+			} else {
+				$msg = "Add to Cart";
+			}
 			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
-			<p><b>$name</b></p><p>\$$cost</p></td>";
-			echo $count%3==0?"</tr><tr>":"";
-			$count++;
+			<p><b>$name</b></p><p>\$$cost</p><p>$msg</p></td>";
 		}
 		echo "</tr></table>";			
 	}
