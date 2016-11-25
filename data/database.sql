@@ -7,7 +7,7 @@
 
 -- a registered user (must have an account to place an order)
 CREATE TABLE AccountHolder (
-	cid INTEGER AUTO_INCREMENT,
+	cid INTEGER NOT NULL,
 	username VARCHAR(12) NOT NULL UNIQUE,
 	password VARCHAR(15) NOT NULL,
 	email VARCHAR(254),
@@ -18,7 +18,7 @@ CREATE TABLE AccountHolder (
 
 -- Sublass of AccountHolder
 CREATE TABLE AdminUser (
-	cid INTEGER AUTO_INCREMENT,
+	cid INTEGER NOT NULL,
 	PRIMARY KEY (cid),
 	FOREIGN KEY (cid) REFERENCES AccountHolder(cid)
 		ON DELETE CASCADE -- delete in Admin if account holder is deleted.
@@ -31,6 +31,8 @@ CREATE TABLE Product (
 	pname VARCHAR(50),
 	description VARCHAR(250),
 	image VARCHAR(100),
+	wid INTEGER NOT NULL,
+	inventory INTEGER,
 	PRIMARY KEY (pid)
 );
 
@@ -42,20 +44,6 @@ CREATE TABLE ProductCategory (
 	PRIMARY KEY (cid),
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE NO ACTION
-		ON UPDATE CASCADE
-);
-
--- the quantity of each product stored in a warehouse
-CREATE TABLE Stores (
-	inventory INTEGER,
-	wid INTEGER NOT NULL,
-	pid INTEGER NOT NULL,
-	PRIMARY KEY (wid, pid),
-	FOREIGN KEY (wid) REFERENCES Warehouse(wid)
-		ON DELETE CASCADE -- if warehouse deleted then remove from Stores
-		ON UPDATE CASCADE,
-	FOREIGN KEY (pid) REFERENCES Product(pid)
-		ON DELETE CASCADE -- if a product is deleted then remove from Stores
 		ON UPDATE CASCADE
 );
 
