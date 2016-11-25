@@ -10,6 +10,12 @@
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
+<form action="">
+	<input type="submit" value="View Cart" />
+</form>
+<form action="login.php">
+	<input type="submit" value="Login" />
+</form>
 
 <p></p>
 <p></p>
@@ -66,7 +72,7 @@
 		echo "<table><tr>";
 		$count = 1;
 		while($stmt->fetch()) {
-			echo "<td><img src=\"http://cosc304.ok.ubc.ca/group6/tomcat/images/products/$image\" alt=\"Product Image\"><p><b>$name</b></p><p>\$$cost</p></td>";
+			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a><p><b>$name</b></p><p>\$$cost</p></td>";
 			echo $count%3==0?"</tr><tr>":"";
 			$count++;
 		}

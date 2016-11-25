@@ -6,7 +6,10 @@
 <body>
 
 <h1>Create Account</h1>
-
+<form action="home.html">
+	<input type="submit" value="Home" />
+</form>
+<p></p>
 <form method="get" action="createacc.php">
 	<table>
 	<tr><td>Username</td><td><input type="text" name="username" size="15"></td></td>
