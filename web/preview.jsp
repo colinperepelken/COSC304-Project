@@ -29,10 +29,11 @@
 		ResultSet rst = p.executeQuery();
 		String pid = rst.getString(1);
 		String pname = rst.getString(2);
-		Double cost = rst.getDouble(3);  = rst.getString(1);
+		Double cost = rst.getDouble(3);
 		out.println("<table>");
-		out.println("<tr><td><a href=\"addcart.jsp?id="+ pid +"&name="+pname+"&cost="+ price + "\">Add to Cart</a></td>");
-		out.println("<td>" + pname + "</td><td>" + currFormat.format(cost) + "</td></tr>");
+		out.println("<tr><td><img href=" +  + "</td>");
+		out.println("<td><tr><a href=\"addcart.jsp?id="+ pid +"&name="+pname+"&cost="+ price + "\">Add to Cart</a></tr>");
+		out.println("<tr>" + pname + "</tr><tr>" + currFormat.format(cost) + "</tr></tr><td>");
 		out.println("</table>");
 		con.close();
 	}catch(SQLException e){
