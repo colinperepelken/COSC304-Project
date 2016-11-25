@@ -7,7 +7,7 @@
 
 <h1>2Kyle16 Offical Merchandise</h1>
 
-<form action="index.html">
+<form action="home.html">
 	<input type="submit" value="Home" />
 </form>
 
@@ -63,11 +63,14 @@
 		
 		$stmt->bind_result($cost, $name, $image); // bind result variables
 		
-		echo "<table>";
+		echo "<table><tr>";
+		$count = 1;
 		while($stmt->fetch()) {
-			echo "<tr><td><img src=\"http://cosc304.ok.ubc.ca/group6/tomcat/images/products/$image\" alt=\"Product Image\"><p><b>$name</b></p><p>\$$cost</p></td></tr>";
+			echo "<td><img src=\"http://cosc304.ok.ubc.ca/group6/tomcat/images/products/$image\" alt=\"Product Image\"><p><b>$name</b></p><p>\$$cost</p></td>";
+			echo $count%3==0?"</tr><tr>":"";
+			$count++;
 		}
-		echo "</table>";			
+		echo "</tr></table>";			
 	}
 	$stmt->close(); // close stmt
 	$conn->close(); // close connection
