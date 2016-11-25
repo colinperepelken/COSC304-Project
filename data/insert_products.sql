@@ -1,5 +1,9 @@
+-- clear database
 DELETE FROM Product;
+DELETE FROM Warehouse;
+DELETE FROM Stores;
 
+-- load products
 INSERT INTO Product(cost,pname,description,image) VALUES (45.00,"CN TOWER Vinyl Album","Includes the hit single 'George Bush' and many other top tracks!","album_record2_300.png");
 INSERT INTO Product(cost,pname,description,image) VALUES (10.00,"Snapback Hat","Comes in grey. A fashionable wear for any occasion. Wear it backwards or forwards!","hat.png");
 INSERT INTO Product(cost,pname,description,image) VALUES (25.00,"Hoodie - Grey","Comes in grey. Warm %100 cotton. Stay toasty this winter. Want to look like a total park rat while you shred the pow at Biggie? Buy this.","hoodie1.png");
@@ -21,3 +25,8 @@ INSERT INTO Product(cost,pname,description,image) VALUES (10.00,"Tote Bag","Carr
 INSERT INTO Product(cost,pname,description,image) VALUES (50.00,"Vape - Grey","Want to rip some fat clouds on a budget? This is the vape for you. Strong, durable construction. Does not include vape juice. Analog clock on the side for timing your wicked rips.","vape_1.png");
 INSERT INTO Product(cost,pname,description,image) VALUES (100.00,"Vape - Black","Stealthy? Classy? 450 degrees Fahrenheit? What could be? Nothing other than the Ultimate Vape TM. Guranteed to impress.","vape_2.png");
 INSERT INTO Product(cost,pname,description,image) VALUES (100000.00,"Vapetastic Premium Edition","ARE YOU READY TO RIP THE FATTEST CLOUD POSSIBLE??? This vape is made from solid gold and comes with cartridges of Kyle''s sweat so you can enjoy both the man AND the vape. Stay smokey my friends.","vape_3.png");
+
+-- load warehouses
+INSERT INTO Warehouse(wid,street,city,province) VALUES (1,"Quilchena Drive","Kelowna","BC");
+INSERT INTO Warehouse(wid,street,city,province) VALUES (2,"Smith Road","Salmon Arm","BC");
+

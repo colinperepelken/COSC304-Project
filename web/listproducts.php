@@ -72,7 +72,8 @@
 		echo "<table><tr>";
 		$count = 1;
 		while($stmt->fetch()) {
-			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a><p><b>$name</b></p><p>\$$cost</p></td>";
+			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
+			<p><b>$name</b></p><p>\$$cost</p></td>";
 			echo $count%3==0?"</tr><tr>":"";
 			$count++;
 		}
