@@ -1,3 +1,16 @@
+drop table ProductCategory;
+drop table HasProduct;
+drop table Ticket;
+drop table Product;
+drop table AdminUser;
+drop table Warehouse;
+drop table CustomerOrder;
+drop table AccountHolder;
+drop table ShippingOption;
+drop table PaymentMethod;
+
+
+
 
 /*
 	2Kyle16 SQL DDL
@@ -25,6 +38,14 @@ CREATE TABLE AdminUser (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE Warehouse (
+	wid INTEGER NOT NULL,
+	street VARCHAR(50),
+	city VARCHAR(50),
+	province VARCHAR(50),
+	PRIMARY KEY (wid)
+);
+
 CREATE TABLE Product (
 	pid INTEGER AUTO_INCREMENT,
 	cost DECIMAL(10,2),
@@ -33,7 +54,10 @@ CREATE TABLE Product (
 	image VARCHAR(100),
 	wid INTEGER NOT NULL,
 	inventory INTEGER,
-	PRIMARY KEY (pid)
+	PRIMARY KEY (pid),
+	FOREIGN KEY (wid) REFERENCES Warehouse(wid)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
 );
 
 -- FIXED: made own entity instead of multi-valued attribute. Colin.
@@ -58,12 +82,15 @@ CREATE TABLE Ticket (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Warehouse (
-	wid INTEGER NOT NULL,
-	street VARCHAR(50),
-	city VARCHAR(50),
-	province VARCHAR(50),
-	PRIMARY KEY (wid)
+
+CREATE TABLE ShippingOption (
+	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
+	PRIMARY KEY (shippingType)
+);
+
+CREATE TABLE PaymentMethod (
+	paymentType VARCHAR(20) CHECK (paymentType IN ('Paypal', 'VISA', 'Mastercard')),
+	PRIMARY KEY (paymentType)
 );
 
 CREATE TABLE CustomerOrder (
@@ -106,12 +133,3 @@ CREATE TABLE HasProduct (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE ShippingOption (
-	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
-	PRIMARY KEY (shippingType)
-);
-
-CREATE TABLE PaymentMethod (
-	paymentType VARCHAR(20) CHECK (paymentType IN ('Paypal', 'VISA', 'Mastercard')),
-	PRIMARY KEY (paymentType)
-);
