@@ -99,4 +99,11 @@
 	$conn->close(); // close connection
 
 ?>
+<<<<<<< HEAD
 </div></div>
+=======
+</div></div>
+<div id = "footer"> bottom text </div>
+</body>
+</html>
+>>>>>>> b4b7abcf1d2b401d4f64c0df83e235ac1b6c6caa
