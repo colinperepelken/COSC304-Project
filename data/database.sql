@@ -1,3 +1,16 @@
+drop table ProductCategory;
+drop table HasProduct;
+drop table Ticket;
+drop table Product;
+drop table AdminUser;
+drop table Warehouse;
+drop table CustomerOrder;
+drop table AccountHolder;
+drop table ShippingOption;
+drop table PaymentMethod;
+
+
+
 
 /*
 	2Kyle16 SQL DDL
@@ -25,6 +38,14 @@ CREATE TABLE AdminUser (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE Warehouse (
+	wid INTEGER NOT NULL,
+	street VARCHAR(50),
+	city VARCHAR(50),
+	province VARCHAR(50),
+	PRIMARY KEY (wid)
+);
+
 CREATE TABLE Product (
 	pid INTEGER AUTO_INCREMENT,
 	cost DECIMAL(10,2),
@@ -32,6 +53,19 @@ CREATE TABLE Product (
 	description VARCHAR(250),
 	image VARCHAR(100),
 	wid INTEGER NOT NULL,
+	inventory INTEGER,
+	PRIMARY KEY (pid),
+	FOREIGN KEY (wid) REFERENCES Warehouse(wid)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+);
+
+CREATE TABLE Ticket (
+	pid INTEGER AUTO_INCREMENT,
+	cost DECIMAL(10,2),
+	pname VARCHAR(50),
+	description VARCHAR(250),
+	image VARCHAR(100),
 	inventory INTEGER,
 	PRIMARY KEY (pid)
 );
@@ -47,23 +81,14 @@ CREATE TABLE ProductCategory (
 		ON UPDATE CASCADE
 );
 
--- Subclass of Product
-CREATE TABLE Ticket (
-	pid INTEGER NOT NULL,
-	ticketDate DATETIME,
-	location VARCHAR(100),
-	PRIMARY KEY (pid),
-	FOREIGN KEY (pid) REFERENCES Product(pid)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+CREATE TABLE ShippingOption (
+	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
+	PRIMARY KEY (shippingType)
 );
 
-CREATE TABLE Warehouse (
-	wid INTEGER NOT NULL,
-	street VARCHAR(50),
-	city VARCHAR(50),
-	province VARCHAR(50),
-	PRIMARY KEY (wid)
+CREATE TABLE PaymentMethod (
+	paymentType VARCHAR(20) CHECK (paymentType IN ('Paypal', 'VISA', 'Mastercard')),
+	PRIMARY KEY (paymentType)
 );
 
 CREATE TABLE CustomerOrder (
@@ -104,14 +129,4 @@ CREATE TABLE HasProduct (
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
-);
-
-CREATE TABLE ShippingOption (
-	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
-	PRIMARY KEY (shippingType)
-);
-
-CREATE TABLE PaymentMethod (
-	paymentType VARCHAR(20) CHECK (paymentType IN ('Paypal', 'VISA', 'Mastercard')),
-	PRIMARY KEY (paymentType)
 );
