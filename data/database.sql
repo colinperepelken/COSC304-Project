@@ -71,21 +71,6 @@ CREATE TABLE ProductCategory (
 		ON UPDATE CASCADE
 );
 
--- Subclass of Product
-CREATE TABLE Ticket (
-	pid INTEGER,
-	ticketDate DATETIME,
-	location VARCHAR(100),
-	cost DECIMAL(10,2),
-	image VARCHAR(100),
-	inventory INTEGER,
-	PRIMARY KEY (pid),
-	FOREIGN KEY (pid) REFERENCES Product(pid)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
-);
-
-
 CREATE TABLE ShippingOption (
 	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
 	PRIMARY KEY (shippingType)
