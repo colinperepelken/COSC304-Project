@@ -50,6 +50,7 @@
 			out.println("</table></td>");
 			out.println("</table>");
 			out.println("<p>"+ desc + "</p>");
+			out.println("<a href=\"viewcart.jsp\">View Cart</a><br><a href=\"login.php\">Log in</a>");
 		}
 		con.close();
 	}catch(SQLException e){
