@@ -8,10 +8,9 @@
 	<link href = "stylesheet.css" rel ="stylesheet" type ="text/css">
 </head>
 <body>
-	<h1>Search for the products you want to buy:</h1>
-	<h2>All Products</h2>
+	<h2>Product</h2>
 	<% // Get product name to search for
-	String id = request.getParameter("pid");
+	String pid = request.getParameter("pid");
 			
 	Connection con = null;
 	try{
@@ -24,17 +23,23 @@
 		PreparedStatement p = null;
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 		p = con.prepareStatement("SELECT pname, cost, description, image FROM Product WHERE pid = ?");
-		p.setString(1, id);
+		p.setString(1, pid);
 		ResultSet rst = p.executeQuery();
-		String pid = rst.getString(1);
-		String pname = rst.getString(2);
-		Double cost = rst.getDouble(3);
-		String image = rst.getString(4);
-		out.println("<table>");
-		out.println("<tr><td><img href=" + image + "</td>");
-		out.println("<td><tr><a href=\"addcart.jsp?id="+ pid +"&name="+pname+"&cost="+ cost + "\">Add to Cart</a></tr>");
-		out.println("<tr>" + pname + "</tr><tr>" + currFormat.format(cost) + "</tr></tr><td>");
-		out.println("</table>");
+		while(rst.next()){
+			String pname = rst.getString(1);
+			Double cost = rst.getDouble(2);
+			String desc = rst.getString(3);
+			String image = rst.getString(4);
+			out.println("<table>");
+			out.println("<td><img src=\"images/products/" + image + "\"></td>");
+			out.println("<td><table>");
+			out.println("<tr><td>" + pname + "</td></tr>");
+			out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>");
+			out.println("<tr><td><a href=\"addcart.jsp?id=" + pid + "&name=" + pname + "&cost=" + cost + "\">Add to Cart</a></td></tr>");
+			out.println("</table></td>");
+			out.println("</table>");
+			out.println("<p>"+ desc + "</p>");
+		}
 		con.close();
 	}catch(SQLException e){
 		out.println("Error: " + e);
