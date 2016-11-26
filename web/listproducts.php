@@ -38,12 +38,12 @@
 		$name = "";	// if search bar is blank
 	}
 	
-	// validation
+	/* VALIDATION */
 	// strip symbols from search
-	
+	$name = preg_replace('/[^\p{L}\p{N}\s]/u', '', $name);
 	
 	$hasParam = false;
-	$query = "SELECT cost, pname, image, inventory FROM Product";
+	$query = "SELECT pid, cost, pname, image, inventory FROM Product";
 	
 	if($name == "") {
 		echo "<h1>All Products</h1>";
@@ -73,7 +73,7 @@
 		if($hasParam) $stmt->bind_param("s", $name); // bind param
 		$stmt->execute(); // execute statement
 		
-		$stmt->bind_result($cost, $name, $image, $inventory); // bind result variables
+		$stmt->bind_result($pid, $cost, $name, $image, $inventory); // bind result variables
 		
 		echo "<table><tr>";
 		$count = 1;
@@ -83,7 +83,7 @@
 			} else {
 				$msg = "<a href=\"home.html\">Add to Cart</a>";
 			}
-			echo "<td><a href=\"images/products/$image\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
+			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
 			<p><b>$name</b></p><p>\$$cost</p><p>$msg</p></td>";
 			echo $count%3==0?"</tr><tr>":""; // 3 per row
  -			$count++;

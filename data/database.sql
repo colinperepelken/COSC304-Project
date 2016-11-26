@@ -73,9 +73,12 @@ CREATE TABLE ProductCategory (
 
 -- Subclass of Product
 CREATE TABLE Ticket (
-	pid INTEGER NOT NULL,
+	pid INTEGER,
 	ticketDate DATETIME,
 	location VARCHAR(100),
+	cost DECIMAL(10,2),
+	image VARCHAR(100),
+	inventory INTEGER,
 	PRIMARY KEY (pid),
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE CASCADE
@@ -132,4 +135,3 @@ CREATE TABLE HasProduct (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
-
