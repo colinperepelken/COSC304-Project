@@ -60,6 +60,16 @@ CREATE TABLE Product (
 		ON UPDATE NO ACTION
 );
 
+CREATE TABLE Ticket (
+	pid INTEGER AUTO_INCREMENT,
+	cost DECIMAL(10,2),
+	pname VARCHAR(50),
+	description VARCHAR(250),
+	image VARCHAR(100),
+	inventory INTEGER,
+	PRIMARY KEY (pid)
+);
+
 -- FIXED: made own entity instead of multi-valued attribute. Colin.
 CREATE TABLE ProductCategory (
 	cid INTEGER NOT NULL,
