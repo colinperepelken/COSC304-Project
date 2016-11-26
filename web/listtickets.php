@@ -11,7 +11,7 @@
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
-<form action="">
+<form action="showcart.jsp">
 	<input type="submit" value="View Cart" />
 </form>
 <form action="login.php">

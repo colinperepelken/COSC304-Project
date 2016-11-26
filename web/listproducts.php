@@ -12,7 +12,7 @@
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
-<form action="">
+<form action="showcart.jsp">
 	<input type="submit" value="View Cart" />
 </form>
 <form action="login.php">
@@ -73,7 +73,7 @@
 		if($hasParam) $stmt->bind_param("s", $name); // bind param
 		$stmt->execute(); // execute statement
 		
-		$stmt->bind_result($pid, $cost, $name, $image, $inventory); // bind result variables
+		$stmt->bind_result($pid, $cost, $pname, $image, $inventory); // bind result variables
 		
 		echo "<table><tr>";
 		$count = 1;
@@ -81,10 +81,15 @@
 			if($inventory=="0") {
 				$msg = "Out of Stock!";
 			} else {
-				$msg = "<a href=\"home.html\">Add to Cart</a>";
+				$msg = "Add to Cart";
 			}
+			
+			// "<a href=\"addcart.jsp?pid=" + $pid + "&pname=" + $pname
+			//	+ "&cost=" + $cost + "\">Add to Cart</a>";
+			// this is the line that should be displaying "Add Cart" while also sending the info to the add cart function
+			// instead, it is displaying the inventory somehow... i dont understand how
 			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
-			<p><b>$name</b></p><p>\$$cost</p><p>$msg</p></td>";
+			<p><b>$pname</b></p><p>\$$cost</p><p>$msg</p></td>";
 			echo $count%3==0?"</tr><tr>":""; // 3 per row
  -			$count++;
 		}
@@ -95,6 +100,3 @@
 
 ?>
 </div></div>
-<div id = "footer"> bottom text </div>
-</body>
-</html>
