@@ -14,15 +14,15 @@ if (itemList == null)
 // Add new product selected
 // Get product information
 String pid = request.getParameter("pid");
-String name = request.getParameter("name");
-String price = request.getParameter("price");
+String pname = request.getParameter("pname");
+String cost = request.getParameter("cost");
 Integer quantity = new Integer(1);
 
 // Store product information in an ArrayList
 ArrayList<Object> product = new ArrayList<Object>();
 product.add(id);
-product.add(name);
-product.add(price);
+product.add(pname);
+product.add(cost);
 product.add(quantity);
 
 // Update quantity if add same item to order again

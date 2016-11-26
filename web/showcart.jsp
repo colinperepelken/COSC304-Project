@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>2Kyle16 Store</title>
+	<title>2Kyle16 Store</title>
+	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
 </head>
 <body>
 
@@ -16,22 +17,22 @@
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})
-HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
+HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");
 
-if (productList == null)
-{	out.println("<H1>Your shopping cart is empty!</H1>");
-	productList = new HashMap<String, ArrayList<Object>>();
+if (itemList == null)
+{	out.println("<H1>Your shopping cart is empty! Get back into that dank shop ;)</H1>");
+	itemList = new HashMap<String, ArrayList<Object>>();
 }
 else
 {
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
-	out.println("<h1>Your Shopping Cart</h1>");
+	out.println("<h1>Your Righteous Items</h1>");
 	out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 	out.println("<th>Price</th><th>Subtotal</th></tr>");
 
 	double total =0;
-	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
+	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
 	while (iterator.hasNext()) 
 	{	Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 		ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
