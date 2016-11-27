@@ -28,7 +28,7 @@
 	
 
 	$hasParam = false;
-	$query = "SELECT pname, cost, image, inventory
+	$query = "SELECT pid, pname, cost, image, inventory
 		      FROM Ticket";
 	
 
@@ -51,7 +51,7 @@
 		echo "Failed to prepare statement";
 	} else { 
 		$stmt->execute();
-		$stmt->bind_result($pname, $cost, $image, $inventory);
+		$stmt->bind_result($pid, $pname, $cost, $image, $inventory);
 		
 		echo "<p>";
 		$count = 1;
@@ -59,9 +59,9 @@
 			if($inventory=="0") {
 				$msg = "Sold out";
 			} else {
-				$msg = "<span>Add to Cart</span>";
+				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname&cost=$cost&qty=1\">Add to Cart</a></span>";
 			}
-			echo "<br><a href=\"images/tickets/$image\"><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\"></a>
+			echo "<br><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\">
 			<br><br><br><b>$pname</b><br>\$$cost<br>$msg<br> </p><br><br><br><br><br>";
 		}
 		echo "";			

@@ -83,7 +83,7 @@
 			if($inventory=="0") {
 				$msg = "Out of Stock!";
 			} else {
-				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname\">Add to Cart</a></span>";
+				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname&cost=$cost&qty=1\">Add to Cart</a></span>";
 			}
 			
 			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>

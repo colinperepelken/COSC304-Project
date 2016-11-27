@@ -99,7 +99,7 @@ else
 session.setAttribute("itemList", itemList);
 // give the customer the option to add more items to their shopping cart
 %>
-<H2><A HREF="home.html">Continue Shopping</A></H2>
+<H2><A HREF="listproducts.php">Continue Shopping</A></H2>
 </FORM>
 </BODY>
 </HTML> 
