@@ -2,23 +2,29 @@
 <html>
 <head>
 <title>Create Account - 2Kyle16</title>
+<link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
-
+<div class = "mainDiv"><div id ="header">image<br><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="/">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
 <h1>Create Account</h1>
+<!--
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
-<p></p>
+<p></p> -->
+
 <form method="get" action="createacc.php">
 	<table>
 	<tr><td>Username</td><td><input type="text" name="username" size="15"></td></td>
 	<tr><td>Password</td><td><input type="password" name="password" size="15"></td></td>
 	<tr><td>Email</td><td><input type="text" name="email" size="15"></td></td>
 	<tr><td>Name</td><td><input type="text" name="name" size="15"></td></td>
-	<tr><td>Date YYYY-MM-DD</td><td><input type="text" name="date" size="15"></td></td>
+	<tr><td>Birthdate (YYYY-MM-DD)</td><td><input type="text" name="date" size="15"></td></td>
 	</table>
-	<input type="submit" value="Create Account">
+	<br><br>
+	<input type="submit" name="submit" value="Sign Up" id="submit" />
 </form>
 <p></p>
 
@@ -50,13 +56,6 @@
 			echo "Failed to connect to server: " . $conn->connect_error;
 		}
 		
-		// INPUT VALIDATION
-		// name and username - strip symbols
-		// email - check format
-		// date - check format
-		// check length of all fields.
-		
-		
 		$stmt = $conn->stmt_init();
 		if(!$stmt->prepare($sql)) {
 			echo "Failed to prepare statement";
@@ -69,6 +68,9 @@
 		$conn->close();
 	}
 ?>
+</center>
+</div></div>
 
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>

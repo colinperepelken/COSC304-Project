@@ -5,10 +5,10 @@
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
-<div class = "mainDiv"><div id = "header">header<br><br></div>
+<div class = "mainDiv"><div id ="header">image<br><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="/">CART</a> <a href="login.php">LOGIN</a> </font></div>
 <div class = "content">
-<h1>2Kyle16 Offical Merchandise</h1>
 <center>
+<!--
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
@@ -17,14 +17,16 @@
 </form>
 <form action="login.php">
 	<input type="submit" value="Login" />
-</form>
+</form> -->
 
 <p></p>
 <p></p>
 
 <form method="get" action="listproducts.php">
 	<input type="text" name="productName" size="50">
-	<input type="submit" value="Submit"> (Leave blank for all products)
+	<input type="submit" value="Search" id="submit"> 
+	<br><br>
+	(Leave blank for all products)
 </form>
 
 <?php
@@ -99,11 +101,7 @@
 	$conn->close(); // close connection
 
 ?>
-<<<<<<< HEAD
+</center>
 </div></div>
-=======
-</div></div>
-<div id = "footer"> bottom text </div>
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
-</html>
->>>>>>> b4b7abcf1d2b401d4f64c0df83e235ac1b6c6caa

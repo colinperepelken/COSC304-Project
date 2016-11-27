@@ -2,24 +2,34 @@
 <html>
 <head>
 <title>Login - 2Kyle16</title>
+<link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
+<div class = "mainDiv"><div id ="header">image<br><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="/">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
 
+<!--
 <h1>Login</h1>
 <form action="home.html">
 	<input type="submit" value="Home" />
-</form>
-<p></p>
+</form> colin i'm commenting out your ugly ass buttons-->
+<p></p><br><br><br>
 <form method="get" action="login.php">
 	Username <input type="text" name="username" size="15">
 	Password <input type="password" name="password" size="15">
-	<input type="submit" value="Login">
+	<input type="submit" id="submit" value="Login">
 </form>
 <p></p>
+
+
+
+<!--
+
 <form action="createacc.php">
 	<input type="submit" value="Create Account" />
 </form>
-
+-->
 <?php
 	error_reporting(-1); // report all PHP errors 
 	ini_set('display_errors', 1);
@@ -61,7 +71,7 @@
 			if($count == 1) {
 				header("location: welcome.html"); // redirect browser to welcome page
 			} else {
-				echo "Your Username or Password is invalid.";
+				echo "<br>Your Username or Password is invalid.";
 			}
 		}
 		$stmt->close();
@@ -70,12 +80,19 @@
 		/*******************TODO: add code to check if user is an admin ***************/
 		
 		
-	} else { // if the user provided no input
-		echo "Please input a username and password.";
+	} else { // if the user provided no input COLIN FIX THIS
+		//echo "Please input a username and password.";
 	}
 	
 
 ?>
+<br><br>
+Don't have an account? <span><a href="createacc.php">Sign up</a></span> today! 
 
+<br><br><br><br>
+</center>
+</div></div>
+
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>facebook link etc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>

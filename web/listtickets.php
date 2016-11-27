@@ -5,21 +5,21 @@
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 </head>
 <body>
+<div class = "mainDiv"><div id ="header">image<br><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="/">CART</a> <a href="login.php">LOGIN</a></font></div>
+<div class = "content">
+<center>
 
-<h1>2Kyle16 Tour Information</h1>
-
+<!--
 <form action="home.html">
 	<input type="submit" value="Home" />
 </form>
-<form action="showcart.jsp">
+<form action="">
 	<input type="submit" value="View Cart" />
 </form>
 <form action="login.php">
 	<input type="submit" value="Login" />
-</form>
+</form> -->
 
-<p></p>
-<p></p>
 
 <?php
 
@@ -31,7 +31,7 @@
 	$query = "SELECT pname, cost, image, inventory
 		      FROM Ticket";
 	
-	echo "<h2>Some Dope Paper Granting Access to Kyle's Lit Concerts</h2>";
+
 
 	$server = "cosc304.ok.ubc.ca";
 	$uid = "group6";
@@ -53,20 +53,25 @@
 		$stmt->execute();
 		$stmt->bind_result($pname, $cost, $image, $inventory);
 		
-		echo "<table><tr>";
+		echo "<p>";
 		$count = 1;
 		while($stmt->fetch()) {
 			if($inventory=="0") {
-				$msg = "Out of Stock!";
+				$msg = "Sold out";
 			} else {
-				$msg = "Add to Cart";
+				$msg = "<span>Add to Cart</span>";
 			}
-			echo "<td><a href=\"images/tickets/$image\"><img src=\"images/tickets/$image\" alt=\"Ticket Image\"></a>
-			<p><b>$pname</b></p><p>\$$cost</p><p>$msg</p></td>";
+			echo "<br><a href=\"images/tickets/$image\"><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\"></a>
+			<br><br><br><b>$pname</b><br>\$$cost<br>$msg<br> </p><br><br><br><br><br>";
 		}
-		echo "</tr></table>";			
+		echo "";			
 	}
 	$stmt->close(); // close stmt
 	$conn->close(); // close connection
 
 ?>
+
+</center>
+</div></div>
+
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>facebook link etc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
