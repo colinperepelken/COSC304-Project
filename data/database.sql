@@ -46,7 +46,7 @@ CREATE TABLE Warehouse (
 	PRIMARY KEY (wid)
 );
 
--- FIXED: made own entity instead of multi-valued attribute. Colin.
+-- FIXED: made own entity instead of multi-valued attribute. Colin
 CREATE TABLE ProductCategory (
 	id INTEGER,
 	name VARCHAR(50) NOT NULL,

@@ -28,6 +28,11 @@
 	<br><br>
 	(Leave blank for all products)
 </form>
+<form>
+	<input type="checkbox" checked="true" name="clothing" value="1">Clothing
+	<input type="checkbox" checked="true" name="accessories" value="2">Accessories
+	<input type="checkbox" checked="true" name="music" value="3">Music
+</form>
 
 <?php
 	error_reporting(-1); // report all PHP errors 
@@ -39,6 +44,14 @@
 	} else {
 		$name = "";	// if search bar is blank
 	}
+	
+	$clothing = $_GET(["clothing"]);
+	$accessories = $_GET(["accessories"]);
+	$music = $_GET(["music"]);
+	
+	echo $clothing;
+	
+	$categories = array(1,2,3);
 	
 	/* VALIDATION */
 	// strip symbols from search
