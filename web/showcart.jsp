@@ -7,9 +7,11 @@
 <HTML>
 <HEAD>
 <TITLE>Shopping Cart</TITLE>
+<link rel="stylesheet" type="text/css" href="2kyle16.css">
 </HEAD>
 <BODY>
-
+<div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content"><center><br><br>
 <script>
 function update(newpid, newqty)
 {
@@ -54,8 +56,8 @@ else
 	}
 
 	// print out HTML to print out the shopping cart
-	out.println("<H1>Your Shopping Cart</H1>");
-	out.print("<TABLE><TR><TH>Product pid</TH><TH>Product Name</TH><TH>Quantity</TH>");
+	//out.println("<H1>Your Shopping Cart</H1>");
+	out.print("<TABLE><TR><TH>Product ID </TH><TH>Product Name </TH><TH>Quantity </TH>");
 	out.println("<TH>Price</TH><TH>Subtotal</TH><TH></TH><TH></TH></TR>");
 
 	int count = 0;
@@ -91,16 +93,26 @@ else
 	// print out order total
 	out.println("<TR><TD COLSPAN=4 ALIGN=RIGHT><B>Order Total</B></TD>"
 			+"<TD ALIGN=RIGHT>"+currFormat.format(total)+"</TD></TR>");
-	out.println("</TABLE>");
+	out.println("</TABLE><br>");
 	//give user option to check out
-	out.println("<H2><A HREF=\"checkout.jsp\">Check Out</A></H2>");
+	out.println("<span><a HREF=\"checkout.jsp\">Check Out</a></span>");
 }
 // set the shopping cart
 session.setAttribute("itemList", itemList);
 // give the customer the option to add more items to their shopping cart
 %>
+<<<<<<< HEAD
 <H2><A HREF="listproducts.php">Continue Shopping</A></H2>
+=======
+<br>
+<span><a HREF="listproducts.php">Continue Shopping</a></span>
+>>>>>>> 3f9e0e0d12c2961676752df67b44729b51ceb494
 </FORM>
+<br>
+</center>
+</div></div>
+
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </BODY>
 </HTML> 
 

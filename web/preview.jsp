@@ -14,9 +14,15 @@
 	</script>
 </head>
 <body>
-	<h2>Product</h2>
+<div class = "mainDiv"><div id ="header">image<br><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="/">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
+<br><br><br><br>
+	
+	<!--
+	<h1>Product</h1>
 	<a href = "listproducts.php">Back</a>
-	<a href = "home.html">Home</a>
+	<a href = "home.html">Home</a> -->
 	<% // Get product name to search for
 	String pid = request.getParameter("pid");
 			
@@ -45,12 +51,12 @@
 			out.println("<td><table>");
 			out.println("<tr><td>" + pname + "</td></tr>");
 			out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box
-			out.println("<tr><td><input type='number' value='1' id='qty' size='3'></td>");
-			out.println("<td><input type='button' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
+			out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1'>");
+			out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
 			out.println("</table></td>");
 			out.println("</table>");
-			out.println("<p>"+ desc + "</p>");
-			out.println("<a href=\"viewcart.jsp\">View Cart</a><br><a href=\"login.php\">Log in</a>");
+			out.println("<p><br>"+ desc + "</p>");
+			//out.println("<a href=\"viewcart.jsp\">View Cart</a><br><a href=\"login.php\">Log in</a>");
 		}
 		con.close();
 	}catch(SQLException e){
@@ -61,6 +67,10 @@
 		}
 	}
 	%>
+<br><br><br>
+</center>
+</div></div>
 
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>
