@@ -83,13 +83,9 @@
 			if($inventory=="0") {
 				$msg = "Out of Stock!";
 			} else {
-				$msg = "Add to Cart";
+				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname\">Add to Cart</a></span>";
 			}
 			
-			// "<a href=\"addcart.jsp?pid=" + $pid + "&pname=" + $pname
-			//	+ "&cost=" + $cost + "\">Add to Cart</a>";
-			// this is the line that should be displaying "Add Cart" while also sending the info to the add cart function
-			// instead, it is displaying the inventory somehow... i dont understand how
 			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
 			<p><b>$pname</b></p><p>\$$cost</p><p>$msg</p></td>";
 			echo $count%3==0?"</tr><tr>":""; // 3 per row
