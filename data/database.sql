@@ -46,6 +46,13 @@ CREATE TABLE Warehouse (
 	PRIMARY KEY (wid)
 );
 
+-- FIXED: made own entity instead of multi-valued attribute. Colin
+CREATE TABLE ProductCategory (
+	id INTEGER,
+	name VARCHAR(50) NOT NULL,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE Product (
 	pid INTEGER AUTO_INCREMENT,
 	cost DECIMAL(10,2),
@@ -54,10 +61,14 @@ CREATE TABLE Product (
 	image VARCHAR(100),
 	wid INTEGER NOT NULL,
 	inventory INTEGER,
+	categoryID INTEGER,
 	PRIMARY KEY (pid),
 	FOREIGN KEY (wid) REFERENCES Warehouse(wid)
 		ON DELETE NO ACTION
-		ON UPDATE NO ACTION
+		ON UPDATE NO ACTION,
+	FOREIGN KEY (categoryID) REFERENCES ProductCategory(id)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Ticket (
@@ -68,17 +79,6 @@ CREATE TABLE Ticket (
 	image VARCHAR(100),
 	inventory INTEGER,
 	PRIMARY KEY (pid)
-);
-
--- FIXED: made own entity instead of multi-valued attribute. Colin.
-CREATE TABLE ProductCategory (
-	cid INTEGER NOT NULL,
-	pid INTEGER NOT NULL,
-	category VARCHAR(50) NOT NULL,
-	PRIMARY KEY (cid),
-	FOREIGN KEY (pid) REFERENCES Product(pid)
-		ON DELETE NO ACTION
-		ON UPDATE CASCADE
 );
 
 CREATE TABLE ShippingOption (
