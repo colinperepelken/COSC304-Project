@@ -15,7 +15,7 @@ if (itemList == null)
 String pid = request.getParameter("pid");
 String pname = request.getParameter("pname");
 String cost = request.getParameter("cost");
-Integer quantity = new Integer(1);
+Integer quantity = new Integer(Integer.parseInt(request.getParameter("qty")));
 
 // Store product information in an ArrayList
 ArrayList<Object> product = new ArrayList<Object>();
