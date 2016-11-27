@@ -8,7 +8,7 @@
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
 	<script>
 		function addcart(pid, pname, cost) {
-			window.location.href ="addcart.jsp?id=" + pid + "&name=" + pname +"&qty=" + document.getElementById('qty').value + "&cost=" + cost;
+			window.location.href ="addcart.jsp?pid=" + pid + "&name=" + pname +"&qty=" + document.getElementById('qty').value + "&cost=" + cost;
 
 		}
 	</script>
