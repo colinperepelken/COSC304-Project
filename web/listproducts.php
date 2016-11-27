@@ -28,7 +28,7 @@
 	<br><br>
 	(Leave blank for all products)
 </form>
-<form>
+<form method="get" action="listproducts.php">
 	<input type="checkbox" checked="true" name="clothing" value="1">Clothing
 	<input type="checkbox" checked="true" name="accessories" value="2">Accessories
 	<input type="checkbox" checked="true" name="music" value="3">Music
@@ -45,20 +45,25 @@
 		$name = "";	// if search bar is blank
 	}
 	
-	$clothing = $_GET(["clothing"]);
-	$accessories = $_GET(["accessories"]);
-	$music = $_GET(["music"]);
-	
-	echo $clothing;
-	
-	$categories = array(1,2,3);
+	//$category = array(1=>1,2=>2,3=>3);
+	/*if($_GET["clothing"] == '1') {
+		$category[1]=1;
+	}
+	if($_POST['accessories'] == '2') {
+		$category[2]=2;
+	}
+	if($_POST['music'] == '3') {
+		$category[3]=3;
+	}*/
 	
 	/* VALIDATION */
 	// strip symbols from search
 	$name = preg_replace('/[^\p{L}\p{N}\s]/u', '', $name);
 	
 	$hasParam = false;
-	$query = "SELECT pid, cost, pname, image, inventory FROM Product";
+	$query = "SELECT pid, cost, pname, image, inventory FROM Product WHERE categoryID=1 OR categoryID=2 OR categoryID=3";
+	
+
 	
 	if($name == "") {
 		echo "<h1>All Products</h1>";
