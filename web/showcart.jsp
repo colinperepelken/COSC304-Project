@@ -7,6 +7,7 @@
 <HTML>
 <HEAD>
 <TITLE>Shopping Cart</TITLE>
+<HEAD>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 </HEAD>
 <BODY>
@@ -107,12 +108,8 @@ if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
 	
 }
 </script>
-<<<<<<< HEAD
-<H2><A HREF="listproducts.php">Continue Shopping</A></H2>
-=======
 <br>
 <span><a HREF="listproducts.php">Continue Shopping</a></span>
->>>>>>> 3f9e0e0d12c2961676752df67b44729b51ceb494
 </FORM>
 <br>
 </center>
