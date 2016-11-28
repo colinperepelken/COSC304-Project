@@ -35,10 +35,7 @@
 				System.out.println("Connecting to db.");
 			
 				PreparedStatement pstmt = null;
-
 				String sql = null;
-				
-
 				out.println("<h1>Your Order Summary</h1>");
 					out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
@@ -73,18 +70,19 @@
 				ResultSet ships = pstmt.executeQuery();
 				pstmt = con.prepareStatement("SELECT * FROM PaymentType");
 				ResultSet pays = pstmt.executeQuery();
-				out.println("<form>");
+				out.println("<form action='finalize.jsp'>");
 				while(ships.next()){
 					String type = ships.getString(1);
 					double cost = currFormat.format(ships.getDouble(2));
-					out.println("<br><input type='radio' value=\""+ type +"\">" + type + " - " + cost);
+					out.println("<br><input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost);
 				}
 				while(pays.next()){
 					String type = pays.getString(1);
-					out.println("<br><input type='radio' value=\""+ type +"\">" + type);
+					out.println("<br><input name='payType' type='radio' value=\""+ type +"\">" + type);
 				}
+				out.println("<input type='submit' value='Confirm'>");
 				out.println("</form>");
-				out.println("<a href=\"finalize.jsp\">Proceed</a>");//button to go to next page, where info is entered into database
+				//button to go to next page, where info is then entered into database
 
 			}
 		}

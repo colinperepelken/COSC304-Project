@@ -34,5 +34,6 @@ else
 	itemList.put(pid,product);
 
 session.setAttribute("itemList", itemList);
+
 %>
 <jsp:forward page="showcart.jsp" />

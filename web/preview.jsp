@@ -9,7 +9,6 @@
 	<script>
 		function addcart(pid, pname, cost) {
 			window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + document.getElementById('number').value + "&cost=" + cost;
-
 		}
 	</script>
 </head>
