@@ -36,9 +36,9 @@ INSERT INTO Product(cost,pname,description,image,wid,inventory,categoryID) VALUE
 INSERT INTO Product(cost,pname,description,image,wid,inventory,categoryID) VALUES (100000.00,"Vapetastic Premium Edition","ARE YOU READY TO RIP THE FATTEST CLOUD POSSIBLE??? This vape is made from solid gold and comes with cartridges of Kyle''s sweat so you can enjoy both the man AND the vape. Stay smokey my friends.","vape_3.png",1,56,2);
 
 
-INSERT INTO Ticket (cost, pname, description, image, inventory) VALUES (10, "Colin's Basement - 01/15/17", "Secret show in Colin\'s basement to kick off the new album.", 'ticket_colin.png', 15);
-INSERT INTO Ticket (cost, pname, description, image, inventory) VALUES (25, "Level - 02/16/17", "It\'s at level!", 'ticket_level.png', 100);
-INSERT INTO Ticket (cost, pname, description, image, inventory) VALUES (50, "Rose's - 03/29/17", "Maria's Birthday bash!!", 'ticket_roses.png', 40);
-INSERT INTO Ticket (cost, pname, description, image, inventory) VALUES (25, "Sapphire - 04/06/17", "Ooohh Sapphire", 'ticket_sapphire.png', 200);
-INSERT INTO Ticket (cost, pname, description, image, inventory) VALUES (15, "The Well - 05/20/17", "Summer show at the Well", 'ticket_well.png', 15);
+INSERT INTO Ticket VALUES (-1, 10, "Colin's Basement - 01/15/17", "Secret show in Colin\'s basement to kick off the new album.", 'ticket_colin.png', 15);
+INSERT INTO Ticket VALUES (-2, 25, "Level - 02/16/17", "It\'s at level!", 'ticket_level.png', 100);
+INSERT INTO Ticket VALUES (-3, 50, "Rose's - 03/29/17", "Maria's Birthday bash!!", 'ticket_roses.png', 40);
+INSERT INTO Ticket VALUES (-4, 25, "Sapphire - 04/06/17", "Ooohh Sapphire", 'ticket_sapphire.png', 200);
+INSERT INTO Ticket VALUES (-5, 15, "The Well - 05/20/17", "Summer show at the Well", 'ticket_well.png', 15);
 

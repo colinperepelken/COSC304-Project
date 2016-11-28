@@ -40,7 +40,7 @@
 
 				
 				// Enter order information into database
-				sql = "INSERT INTO CustomerOrder (cid, carTotal) VALUES(?, 0);";
+				sql = "INSERT INTO CustomerOrder (cartTotal) VALUES(0);";
 
 				// Retrieve auto-generated key for orderId
 				pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

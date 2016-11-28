@@ -72,7 +72,7 @@ CREATE TABLE Product (
 );
 
 CREATE TABLE Ticket (
-	pid INTEGER AUTO_INCREMENT,
+	pid INTEGER NOT NULL,
 	cost DECIMAL(10,2),
 	pname VARCHAR(50),
 	description VARCHAR(250),
