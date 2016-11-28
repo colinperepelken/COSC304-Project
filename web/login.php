@@ -70,8 +70,10 @@
 			
 			if($count == 1) {
 				header("location: welcome.html"); // redirect browser to welcome page
+				$_SESSION['isLoggedIn'] = true; 
 			} else {
 				echo "<br>Your Username or Password is invalid.";
+				$_SESSION['isLoggedIn'] = false;
 			}
 		}
 		$stmt->close();
