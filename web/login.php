@@ -69,8 +69,9 @@
 			}
 			
 			if($count == 1) {
-				header("location: welcome.html"); // redirect browser to welcome page
-				$_SESSION['isLoggedIn'] = true; 
+				$sql = "INSERT INTO UserSession VALUES ";//needs to update user session in db to store 
+				$_SERVER['HTTP_REFERER'];
+				header("location: $_SERVER['HTTP_REFERER]"); // redirect browser to welcome page
 			} else {
 				echo "<br>Your Username or Password is invalid.";
 				$_SESSION['isLoggedIn'] = false;
