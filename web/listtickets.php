@@ -66,7 +66,8 @@
 				$msg = "Sold out";
 			} else {
 				$msg = "<tr><td><input type='number' id='number$count' value='1' id='qty' size='1' min='1'>";
-				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" onclick=\"addcart('$pid', '$pname', '$cost', 'number$count')\"></td></tr>";
+				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" 
+					onclick=\"addcart(&#34;$pid&#34;, &#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
 				
 			}
 			echo "<br><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\">
