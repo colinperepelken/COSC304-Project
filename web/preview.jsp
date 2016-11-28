@@ -50,7 +50,7 @@
 			out.println("<td><table>");
 			out.println("<tr><td>" + pname + "</td></tr>");
 			out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box
-			out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1'>");
+			out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1' max='100'>");
 			out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
 			out.println("</table></td>");
 			out.println("</table>");
