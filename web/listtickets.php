@@ -3,6 +3,12 @@
 <head>
 <title>2Kyle16 Store</title>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
+<script>
+	function addcart(pid, pname, cost, id) {
+		window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + document.getElementById(id).value + "&cost=" + cost;
+
+	}
+</script>
 </head>
 <body>
 <div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a></font></div>
@@ -59,18 +65,19 @@
 			if($inventory=="0") {
 				$msg = "Sold out";
 			} else {
-				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname&cost=$cost&qty=1\">Add to Cart</a></span>";
+				$msg = "<tr><td><input type='number' id='number$count' value='1' id='qty' size='1' min='1'>";
+				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" onclick=\"addcart('$pid', '$pname', '$cost', 'number$count')\"></td></tr>";
+				
 			}
 			echo "<br><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\">
 			<br><br><br><b>$pname</b><br>\$$cost<br>$msg<br> </p><br><br><br><br><br>";
-		}
-		echo "";			
+			$count++;
+		}		
 	}
 	$stmt->close(); // close stmt
 	$conn->close(); // close connection
 
 ?>
-
 </center>
 </div></div>
 
