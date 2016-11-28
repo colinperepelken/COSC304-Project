@@ -83,6 +83,7 @@ CREATE TABLE Ticket (
 
 CREATE TABLE ShippingOption (
 	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
+	cost DECIMAL(10,2),
 	PRIMARY KEY (shippingType)
 );
 
