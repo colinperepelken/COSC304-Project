@@ -7,6 +7,7 @@
 <HTML>
 <HEAD>
 <TITLE>Shopping Cart</TITLE>
+<HEAD>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 </HEAD>
 <BODY>
@@ -94,8 +95,7 @@ else
 	out.println("<TR><TD COLSPAN=4 ALIGN=RIGHT><B>Order Total</B></TD>"
 			+"<TD ALIGN=RIGHT>"+currFormat.format(total)+"</TD></TR>");
 	out.println("</TABLE><br>");
-	//give user option to check out
-	out.println("<span><a HREF=\"checkout.jsp\">Check Out</a></span>");
+
 }
 // set the shopping cart
 session.setAttribute("itemList", itemList);
@@ -107,12 +107,10 @@ if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
 	
 }
 </script>
-<<<<<<< HEAD
-<H2><A HREF="listproducts.php">Continue Shopping</A></H2>
-=======
 <br>
 <span><a HREF="listproducts.php">Continue Shopping</a></span>
->>>>>>> 3f9e0e0d12c2961676752df67b44729b51ceb494
+<br>
+<span><a HREF="checkout.jsp">Check Out</a></span>
 </FORM>
 <br>
 </center>
