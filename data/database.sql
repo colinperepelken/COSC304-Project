@@ -5,6 +5,7 @@ drop table Product;
 drop table ProductCategory;
 drop table Warehouse;
 drop table CustomerOrder;
+drop table UserSession;
 drop table AccountHolder;
 drop table ShippingOption;
 drop table PaymentMethod;
@@ -132,6 +133,7 @@ CREATE TABLE HasProduct (
 );
 CREATE TABLE UserSession (
 	cid INTEGER NOT NULL,
+	referralURL VARCHAR(200),
 	PRIMARY KEY(cid),
 	FOREIGN KEY (cid) REFERENCES AccountHolder(cid)
 );
