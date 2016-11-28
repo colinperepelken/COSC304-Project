@@ -32,10 +32,12 @@ String update = request.getParameter("update");
 String newqty = request.getParameter("newqty");
 
 // check if shopping cart is empty
-if (itemList == null)
-{	out.println("<H1>Your shopping cart is empty!</H1>");
+if (itemList.isEmpty())
+{	
+	out.println("<H1>Your shopping cart is empty!</H1>");
 	itemList = new HashMap();
 }
+
 else
 {
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
