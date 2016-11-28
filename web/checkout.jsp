@@ -73,7 +73,7 @@
 				out.println("<form action='finalize.jsp'>");
 				while(ships.next()){
 					String type = ships.getString(1);
-					double cost = currFormat.format(ships.getDouble(2));
+					String cost = currFormat.format(ships.getDouble(2));
 					out.println("<br><input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost);
 				}
 				while(pays.next()){
@@ -83,10 +83,8 @@
 				out.println("<input type='submit' value='Confirm'>");
 				out.println("</form>");
 				//button to go to next page, where info is then entered into database
-
 			}
 		}
-	
 		catch (SQLException ex){
 			out.println(ex);
 		}

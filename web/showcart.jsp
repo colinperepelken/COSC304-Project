@@ -110,7 +110,7 @@ if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
 <br>
 <span><a HREF="listproducts.php">Continue Shopping</a></span>
 <br>
-<span><a HREF=\"checkout.jsp\">Check Out</a></span>
+<span><a HREF="checkout.jsp">Check Out</a></span>
 </FORM>
 <br>
 </center>
