@@ -69,12 +69,17 @@
 			}
 			
 			if($count == 1) {
-				$sql = "INSERT INTO UserSession VALUES ";//needs to update user session in db to store 
+				// to do query to get cid that was just inserted 
+				
+			
+				// then add into user session
+				$sql = "INSERT INTO UserSession(cid, referralURL) VALUES ();";//needs to update user session in db to store 
 				$_SERVER['HTTP_REFERER'];
+				
+				
 				header("location: $_SERVER['HTTP_REFERER]"); // redirect browser to welcome page
 			} else {
 				echo "<br>Your Username or Password is invalid.";
-				$_SESSION['isLoggedIn'] = false;
 			}
 		}
 		$stmt->close();
