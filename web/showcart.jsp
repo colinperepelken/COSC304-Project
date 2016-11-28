@@ -32,7 +32,8 @@ String update = request.getParameter("update");
 String newqty = request.getParameter("newqty");
 
 // check if shopping cart is empty
-if (itemList.isEmpty())
+
+if (itemList.isEmpty() || itemList == null)
 {	
 	out.println("<H1>Your shopping cart is empty!</H1>");
 	itemList = new HashMap();
