@@ -17,6 +17,7 @@ function update(newpid, newqty)
 {
 	window.location="showcart.jsp?update="+newpid+"&newqty="+newqty;
 }
+
 </script>
 <FORM name="form1">
 
@@ -57,7 +58,7 @@ else
 
 	// print out HTML to print out the shopping cart
 	//out.println("<H1>Your Shopping Cart</H1>");
-	out.print("<TABLE><TR><TH>Product ID </TH><TH>Product Name </TH><TH>Quantity </TH>");
+	out.print("<TABLE><TR><TH>Product Name </TH><TH>Quantity </TH>");
 	out.println("<TH>Price</TH><TH>Subtotal</TH><TH></TH><TH></TH></TR>");
 
 	int count = 0;
@@ -69,7 +70,6 @@ else
 		Map.Entry entry = (Map.Entry)(iterator.next());
 		product = (ArrayList) entry.getValue();
 		// read in values for that product pid
-		out.print("<TR><TD>"+product.get(0)+"</TD>");
 		out.print("<TD>"+product.get(1)+"</TD>");
 
 		out.print("<TD ALIGN=CENTER><INPUT TYPE=\"text\" name=\"newqty"+count+"\" size=\"3\" value=\""
@@ -101,6 +101,12 @@ else
 session.setAttribute("itemList", itemList);
 // give the customer the option to add more items to their shopping cart
 %>
+<script>
+if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
+	location.href = "showcart.jsp";
+	
+}
+</script>
 <<<<<<< HEAD
 <H2><A HREF="listproducts.php">Continue Shopping</A></H2>
 =======
