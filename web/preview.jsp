@@ -8,7 +8,10 @@
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
 	<script>
 		function addcart(pid, pname, cost) {
-			window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + document.getElementById('number').value + "&cost=" + cost;
+			qty = document.getElementById('number').value;
+			if(!(qty=="" || qty==null)){
+				window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + qty + "&cost=" + cost;
+			}
 		}
 	</script>
 </head>
@@ -35,7 +38,7 @@
 
 		PreparedStatement p = null;
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-		p = con.prepareStatement("SELECT pname, cost, description, image FROM Product WHERE pid = ?");
+		p = con.prepareStatement("SELECT pname, cost, description, image, inventory FROM Product WHERE pid = ?");
 		p.setString(1, pid);
 		ResultSet rst = p.executeQuery();
 		
@@ -45,17 +48,22 @@
 			Double cost = rst.getDouble(2);
 			String desc = rst.getString(3);
 			String image = rst.getString(4);
+			int inventory = rst.getInt(5);
 			out.println("<table>");
 			out.println("<td><img src=\"images/products/" + image + "\"></td>");
 			out.println("<td><table>");
 			out.println("<tr><td>" + pname + "</td></tr>");
-			out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box
-			out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1' max='100'>");
-			out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
+			if(inventory<= 0){
+				out.println("<tr><td>Out of Stock</td><tr>");
+			}else{
+				out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box
+				out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1' max='100'>");
+				out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
+			}
 			out.println("</table></td>");
 			out.println("</table>");
 			out.println("<p><br>"+ desc + "</p>");
-			//out.println("<a href=\"viewcart.jsp\">View Cart</a><br><a href=\"login.php\">Log in</a>");
+			
 		}
 		con.close();
 	}catch(SQLException e){
