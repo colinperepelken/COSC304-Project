@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>2Kyle16 Store</title>
+<title>2Kyle16 Tickets</title>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 <script>
 	function addcart(pid, pname, cost, id) {
@@ -65,7 +65,7 @@
 			if($inventory=="0") {
 				$msg = "Sold out";
 			} else {
-				$msg = "<tr><td><input type='number' id='number$count' value='1' id='qty' size='1' min='1'>";
+				$msg = "<tr><td><input type='number' id='number' id='number$count' value='1' id='qty' size='1' min='1'>";
 				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" 
 					onclick=\"addcart(&#34;$pid&#34;, &#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
 				

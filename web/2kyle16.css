@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 Style Sheet for the whole website.
+=======
+Style Sheet for the whole website. If you're editing this then Brit's probably gonna yell at you. 
+>>>>>>> 72e3c0dc02c8c93ab274f183c386d3b1f6643696
 */
 
 body {
@@ -83,6 +87,7 @@ h1{
     color: white;
 	border: 2px solid #d9373c;
 	cursor: pointer;
+
 }
 
 #number{
