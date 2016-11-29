@@ -49,7 +49,7 @@ session_start();
 		$_SESSION["last_page"] = $_SERVER['HTTP_REFERER'];
 		}
 	
-		if(!empty($_GET["username"]) && !empty($_GET["password"])) {
+		if(isset($_GET["username"]) && isset($_GET["password"])) {
 			/* Read in parameters */
 			$username = $_GET["username"];
 			$password = $_GET["password"];
