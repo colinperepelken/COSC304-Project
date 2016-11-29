@@ -127,15 +127,15 @@ session_start();
 			//echo "Please input a username and password.";
 		}
 		
-		
+		echo "<br><br>";
+		echo "Don't have an account? <span><a href=\"createacc.php\">Sign up</a></span> today! ";
 	}
 	
 	
 	
 
 ?>
-<br><br>
-Don't have an account? <span><a href="createacc.php">Sign up</a></span> today! 
+
 
 <br><br><br><br>
 </center>
