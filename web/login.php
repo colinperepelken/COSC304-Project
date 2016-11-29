@@ -22,6 +22,9 @@
 </form>
 <p></p>
 
+<?php
+session_start();
+?>
 
 
 <!--
@@ -33,6 +36,9 @@
 <?php
 	error_reporting(-1); // report all PHP errors 
 	ini_set('display_errors', 1);
+	if(!(preg_match('/login/',$_SERVER['HTTP_REFERER']))) {
+		$_SESSION["last_page"] = $_SERVER['HTTP_REFERER'];
+	}
 	
 	if(!empty($_GET["username"]) && !empty($_GET["password"])) {
 		/* Read in parameters */
@@ -67,14 +73,34 @@
 			while($stmt->fetch()) {
 				$count++;
 			}
-			
+	
 			if($count == 1) {
-				$sql = "INSERT INTO UserSession VALUES ";//needs to update user session in db to store 
-				$_SERVER['HTTP_REFERER'];
-				header("location: $_SERVER['HTTP_REFERER]"); // redirect browser to welcome page
+				// delete everythig from user session lol
+				$deletesql = "DELETE FROM UserSession;";
+				$stmt1 = $conn->prepare($deletesql);
+				if(!$stmt1->prepare($deletesql)) {
+					echo "Failed to prepare statement.";
+				} else {
+					$stmt1->execute();
+				}
+				
+				// then add into user session
+				$sql = "INSERT INTO UserSession(cid, referralURL) VALUES (?, ?);";//needs to update user session in db to store 
+				$stmt2 = $conn->prepare($sql);
+				if(!$stmt2->prepare($sql)) {
+					echo "Failed to prepare statement.";
+				} else {
+					echo $_SESSION["last_page"];
+					$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
+					$stmt2->execute();
+				}
+				
+				$last_page = $_SESSION["last_page"];
+				// re direct to what we just stored in the database... that moment when you realize you didnt have to do any of the above and could have just used the session 
+				header("Location: $last_page");
+				
 			} else {
 				echo "<br>Your Username or Password is invalid.";
-				$_SESSION['isLoggedIn'] = false;
 			}
 		}
 		$stmt->close();
