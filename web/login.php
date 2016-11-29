@@ -99,19 +99,42 @@ session_start();
 					if(!$stmt2->prepare($sql)) {
 						echo "Failed to prepare statement.";
 					} else {
-						echo $_SESSION["last_page"];
 						$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
 						$stmt2->execute();
 					}
+					$stmt2->close();
+					
+					/* check if user is an admin */
+					$sql = "SELECT cid FROM AdminUser WHERE cid=?;";
+					$stmt2 = $conn->prepare($sql);
+					if(!$stmt2->prepare($sql)) {
+						echo "Failed to prepare statement.";
+					} else {
+						$stmt2->bind_param("s", $cid);
+						$stmt2->execute();
+						
+						$count = 0;
+						while($stmt2->fetch()) {
+							$count++;
+						}
+						
+						if($count == 1) { // then user is an admin user
+							$isAdmin = "true";
+						} else { // else user is not an admin
+							$isAdmin = "false";
+						}
+					}
+					
 					
 					$last_page = $_SESSION["last_page"]; // get the last page so can redirect to it after logging in
 					
 					/* Store cid and username in PHP session so can tell if user is logged in on other pages */
 					$_SESSION["cid"] = $cid;
 					$_SESSION["username"] = $username;
+					$_SESSION["isAdmin"] = $isAdmin;
 					
 					/* Store session attributes in JSP session as well hahahha */
-					header("Location: setjspsesh.jsp?cid=$cid&username=$username&last=$last_page"); // jsp code will re direct to last page as well
+					header("Location: setjspsesh.jsp?cid=$cid&username=$username&admin=$isAdmin&last=$last_page"); // jsp code will re direct to last page as well
 					
 				} else {
 					echo "<br>Your Username or Password is invalid.";
