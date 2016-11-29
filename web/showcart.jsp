@@ -47,9 +47,7 @@ String newqty = request.getParameter("newqty");
 if (itemList == null){
 	out.println("<H1>Your shopping cart is empty!</H1>");
 	itemList = new HashMap();
-}
-else if(itemList.isEmpty())
-{	
+} else if(itemList.isEmpty()) {	
 	out.println("<H1>Your shopping cart is empty!</H1>");
 }
 
@@ -128,9 +126,16 @@ if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
 <br>
 <span><a HREF="listproducts.php">Continue Shopping</a></span>
 <br>
-<span><a HREF="checkout.jsp">Check Out</a></span>
+
+<%
+if (itemList != null && !itemList.isEmpty()){
+	out.println("<span><a HREF='checkout.jsp'>Check Out</a></span>");
+}
+%>
+
 </FORM>
 <br>
+
 </center>
 </div></div>
 
