@@ -53,7 +53,7 @@
 			out.println("<td><img src=\"images/products/" + image + "\"></td>");
 			out.println("<td><table>");
 			out.println("<tr><td>" + pname + "</td></tr>");
-			if(inventory<= 0){
+			if(inventory <= 0){
 				out.println("<tr><td>Out of Stock</td><tr>");
 			}else{
 				out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box

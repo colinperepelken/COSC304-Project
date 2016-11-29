@@ -20,16 +20,17 @@
 try {
 	getConnection();
 	String sql = "SELECT cid FROM UserSession";
-	ResultSet sesh = executeQuery(sql);
+	ResultSet sesh = con.createStatement().executeQuery(sql);
 	if(sesh.first()){
-		Integer cid = (Integer) sesh.get(1);
-		HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");	
+		Integer cid = (Integer) sesh.getInt(1);
+		HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 		PreparedStatement pstmt = null;
+		
 		out.println("<h1>Your Order Summary</h1>");
-		out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
+		out.println("<table border='1'><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
 		double total = 0;
-		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
+		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 					
 		while (iterator.hasNext())//print out cart info
@@ -48,27 +49,33 @@ try {
 			out.println("</tr>");
 			total = total +pr*qty;
 		}
-		out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td>"
-						+"<td align=\"right\">"+currFormat.format(total)+"</td></tr>");
-		out.println("</table>");
-		//TODO: shipping info, payment info(radio buttons)
+		out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td><td align=\"right\">"+currFormat.format(total)+"</td></tr>");
 		
-		pstmt = con.prepareStatement("SELECT * FROM ShippingType");
+		pstmt = con.prepareStatement("SELECT * FROM ShippingOption");
 		ResultSet ships = pstmt.executeQuery();
-		pstmt = con.prepareStatement("SELECT * FROM PaymentType");
+		pstmt = con.prepareStatement("SELECT * FROM PaymentMethod");
 		ResultSet pays = pstmt.executeQuery();
+		
 		out.println("<form action='finalize.jsp'>");
+		out.println("<tr><td><a>Enter your shipping address:</a><br>");
+		out.println("<input type='text' name='address'><td><tr>");
+		
+		// prints radio buttons for shipping and payment
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
 			out.println("<br><input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost);
 		}
+		out.println("<td>");
 		while(pays.next()){
 			String type = pays.getString(1);
 			out.println("<br><input name='payType' type='radio' value=\""+ type +"\">" + type);
 		}
-		out.println("<input type='submit' value='Confirm'>");
+		
+		out.println("</td></table>");
+		out.println("<input id='submit' type='submit' value='Confirm'>");
 		out.println("</form>");
+
 		//button to go to next page, where info is then entered into database
 		
 	}else{
