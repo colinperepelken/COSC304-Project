@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>2Kyle16 Store</title>
+<title>2Kyle16 Tickets</title>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
 <script>
 	function addcart(pid, pname, cost, id) {

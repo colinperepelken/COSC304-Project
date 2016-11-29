@@ -27,7 +27,7 @@ try {
 		PreparedStatement pstmt = null;
 		
 		out.println("<h1>Your Order Summary</h1>");
-		out.println("<table border='1'><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
+		out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
 		double total = 0;
 		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
@@ -57,19 +57,19 @@ try {
 		ResultSet pays = pstmt.executeQuery();
 		
 		out.println("<form action='finalize.jsp'>");
-		out.println("<tr><td><a>Enter your shipping address:</a><br>");
-		out.println("<input type='text' name='address'><td><tr>");
+		out.println("<tr><td><p>Enter your shipping address:</p>");
+		out.println("<input type='text' name='address'><tr><td>");
 		
 		// prints radio buttons for shipping and payment
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
-			out.println("<br><input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost);
+			out.println("<input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
 		}
-		out.println("<td>");
+		out.println("</td><td>");
 		while(pays.next()){
 			String type = pays.getString(1);
-			out.println("<br><input name='payType' type='radio' value=\""+ type +"\">" + type);
+			out.println("<input name='payType' type='radio' value=\""+ type +"\">" + type+"<br>");
 		}
 		
 		out.println("</td></table>");
