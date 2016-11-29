@@ -96,6 +96,11 @@ session_start();
 				}
 				
 				$last_page = $_SESSION["last_page"];
+				
+				/* Store cid and username is session so can tell if user is logged in on other pages */
+				$_SESSION["cid"] = $cid;
+				$_SESSION["username"] = $username;
+				
 				// re direct to what we just stored in the database... that moment when you realize you didnt have to do any of the above and could have just used the session 
 				header("Location: $last_page");
 				

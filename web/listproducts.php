@@ -22,6 +22,15 @@
 <p></p>
 <p></p>
 
+<?php
+	session_start();
+	if(isset($_SESSION["cid"])) {
+		$username = $_SESSION["username"];
+		echo "<p>Logged in as $username</p>";
+	}
+?>
+
+
 <form method="get" action="listproducts.php">
 	(Leave blank for all products)
 	<br>
