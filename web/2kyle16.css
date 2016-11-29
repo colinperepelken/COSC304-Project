@@ -1,0 +1,128 @@
+/*
+Style Sheet for the whole website.
+*/
+
+body {
+	background-color: #083352;
+}
+
+.mainDiv {
+	background-color: #E4DED0;
+	color: #181619;
+	width: 1000px;
+	padding: none;
+	margin: auto;
+	font-family: verdana, sans-serif;
+}
+
+.content{
+	color: #181619;
+	text-align: left;
+	padding: 10px;
+	font-family: verdana, sans-serif;
+}
+
+#header {
+	width: 1000px;
+	background-color: #d9373c;
+	word-spacing: 20px;
+	margin: auto;
+	font-size: 20;
+	color: white;
+	text-align: center;
+	font-family: "Trebuchet MS", verdana, sans-serif;
+  
+}
+
+a:link, a:visited, a:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #ABCCBD;
+}
+
+table {
+	border: none;
+	text-align: center;
+}
+
+span{
+  color:  #d9373c;
+}
+
+h1{
+	font-family: "Trebuchet MS", verdana, sans-serif;
+	font-size: 27;
+}
+
+#footer{
+	color: white;
+	font-size: 12px;
+	font-family: verdana, sans-serif;
+	text-align: center;
+}
+
+#submit {
+    background-color: #d9373c; 
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	font-family: verdana, sans-serif;
+    font-size: 16px;
+	border-radius: 12px;
+	border: 2px solid #d9373c;
+}
+
+#submit:hover {
+    background-color: #C10000; 
+    color: white;
+	border: 2px solid #d9373c;
+	cursor: pointer;
+}
+
+#number{
+	width: 35px;
+}
+
+table#prod {
+    width: 100%; 
+}
+
+table#prod td {
+    height: 350px;
+	width: 300px;
+	vertical-align: bottom;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+
+/*
+<link rel="stylesheet" type="text/css" href="2kyle16.css">
+
+
+<div class = "mainDiv"><div id ="header">image<br><br><a href="/">LINK</a> LINK LINK</div>
+  <div class = "content">yo yo yo it's a website we've got text n shit<br>
+    <center>
+    <table>
+      <tr><td><img src="http://cosc304.ok.ubc.ca/group6/tomcat/images/products/shirt_blue.png">
+      <br>eyyy it's ya boy kyle<br>$16.00<br><span>add to cart</span>  
+      </td>
+      <td><img src="http://cosc304.ok.ubc.ca/group6/tomcat/images/products/shirt_face.png">
+      <br>what a beautiful shirt<br>$15.50<br><span>add to cart</span> 
+      </td></tr>
+      
+    </table>
+    
+    </center>
+    
+    
+    
+  </div></div>*/
