@@ -12,6 +12,18 @@
 </head>
 <body>
 <div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a></font></div>
+<div style="float: left;">
+<?php
+	/* Check if user is logged in and display message */
+	session_start();
+	if(isset($_SESSION["cid"])) {
+		$username = $_SESSION["username"];
+		echo "Logged in as $username <span><a href=\"logout.php\">Logout</a></span>";
+	} else {
+		echo "Logged in as Guest";
+	}
+?>
+</div>
 <div class = "content">
 <center>
 
