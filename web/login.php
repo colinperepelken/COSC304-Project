@@ -116,18 +116,6 @@ session_start();
 				} else {
 					echo "<br>Your Username or Password is invalid.";
 				}
-				
-				$last_page = $_SESSION["last_page"];
-				
-				/* Store cid and username is session so can tell if user is logged in on other pages */
-				$_SESSION["cid"] = $cid;
-				$_SESSION["username"] = $username;
-				
-				// re direct to what we just stored in the database... that moment when you realize you didnt have to do any of the above and could have just used the session 
-				header("Location: $last_page");
-				
-			} else {
-				echo "<br>Your Username or Password is invalid.";
 			}
 			$stmt->close();
 			$conn->close();
@@ -153,6 +141,6 @@ Don't have an account? <span><a href="createacc.php">Sign up</a></span> today!
 </center>
 </div></div>
 
-<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>facebook link etc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>

@@ -19,24 +19,6 @@
 	<input type="submit" value="Login" />
 </form> -->
 
-<p></p>
-<p></p>
-
-<?php
-	session_start();
-	if(isset($_SESSION["cid"])) {
-		$username = $_SESSION["username"];
-		echo "<p>Logged in as $username</p>";
-	}
-?>
-
-
-<form method="get" action="listproducts.php">
-	(Leave blank for all products)
-	<br>
-	<input type="text" name="productName" size="50">
-	<input type="submit" value="Search" id="submit"> 
-	<br>
 <div style="float: left;">
 <?php
 	/* Check if user is logged in and display message */
@@ -136,7 +118,7 @@
 		
 		$stmt->bind_result($pid, $cost, $pname, $image, $inventory); // bind result variables
 		
-		echo "<table id=\"prod\"><tr>";
+		echo "<table><tr>";
 		$count = 1;
 		while($stmt->fetch()) {
 			if($inventory=="0") {
@@ -145,7 +127,7 @@
 				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname&cost=$cost&qty=1\">Add to Cart</a></span>";
 			}
 			
-			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" height=\"200px\" alt=\"Product Image\"></a>
+			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
 			<p><b>$pname</b></p><p>\$$cost</p><p>$msg</p></td>";
 			echo $count%3==0?"</tr><tr>":""; // 3 per row
  -			$count++;
