@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ include file="connection.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,8 @@
 	<% // Get product name to search for
 	String pid = request.getParameter("pid");
 			
-	Connection con = null;
 	try{
-		String url = "jdbc:mysql://cosc304.ok.ubc.ca/db_group6";
-		String uid = "group6";
-		String pw = "group6";
-		con = DriverManager.getConnection(url, uid, pw);
-		System.out.println("Connecting to db.");
+		getConnection();
 
 		PreparedStatement p = null;
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
