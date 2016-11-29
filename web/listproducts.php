@@ -19,17 +19,28 @@
 	<input type="submit" value="Login" />
 </form> -->
 
-<p></p>
-<p></p>
-
+<div style="float: left;">
+<?php
+	/* Check if user is logged in and display message */
+	session_start();
+	if(isset($_SESSION["cid"])) {
+		$username = $_SESSION["username"];
+		echo "Logged in as $username <span><a href=\"logout.php\">Logout</a></span>";
+	} else {
+		echo "Logged in as Guest";
+	}
+?>
+</div>
+<br>
+<br>
 <form method="get" action="listproducts.php">
+	<input type="text" name="productName" size="50">
+	<input type="submit" value="Search" id="submit"> 
+	<br>
+	<br>
 	<input type="checkbox" checked="true" name="clothing" value="1">Clothing
 	<input type="checkbox" checked="true" name="accessories" value="2">Accessories
 	<input type="checkbox" checked="true" name="music" value="3">Music
-	<input type="text" name="productName" size="50">
-	<input type="submit" value="Search" id="submit"> 
-	<br><br>
-	(Leave blank for all products)
 </form>
 
 <?php

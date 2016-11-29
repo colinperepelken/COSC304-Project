@@ -15,12 +15,7 @@
 	<input type="submit" value="Home" />
 </form> colin i'm commenting out your ugly ass buttons-->
 <p></p><br><br><br>
-<form method="get" action="login.php">
-	Username <input type="text" name="username" size="15">
-	Password <input type="password" name="password" size="15">
-	<input type="submit" id="submit" value="Login">
-</form>
-<p></p>
+
 
 <?php
 session_start();
@@ -36,82 +31,106 @@ session_start();
 <?php
 	error_reporting(-1); // report all PHP errors 
 	ini_set('display_errors', 1);
-	if(!(preg_match('/login/',$_SERVER['HTTP_REFERER']))) {
+	
+	/* Check if logged in already */
+	if(isset($_SESSION["username"])) {
+		$username = $_SESSION["username"];
+		echo "<p>Already logged in as $username <span><a href=\"logout.php\">Logout</a></span></p>"; // user is already logged in
+	} else {
+		// not logged in, display login form
+		echo "<form method=\"get\" action=\"login.php\">
+	Username <input type=\"text\" name=\"username\" size=\"15\">
+	Password <input type=\"password\" name=\"password\" size=\"15\">
+	<input type=\"submit\" id=\"submit\" value=\"Login\">
+</form>
+<p></p>";
+		
+		if(!(preg_match('/login/',$_SERVER['HTTP_REFERER']))) { // do not store login as last page
 		$_SESSION["last_page"] = $_SERVER['HTTP_REFERER'];
-	}
-	
-	if(!empty($_GET["username"]) && !empty($_GET["password"])) {
-		/* Read in parameters */
-		$username = $_GET["username"];
-		$password = $_GET["password"];
-		
-		$query = "SELECT cid FROM AccountHolder WHERE username = ? AND password = ?";
-		
-		// connection information
-		$server = "cosc304.ok.ubc.ca";
-		$uid = "group6";
-		$pw = "group6";
-		$db = "db_group6";
-		
-		// connect
-		$conn = new mysqli($server, $uid, $pw, $db);
-		
-		// check connection
-		if($conn->connect_error)
-			echo "Failed to connect to server: " . $conn->connect_error;
-		
-		$stmt = $conn->stmt_init();
-		if(!$stmt->prepare($query)) {
-			echo "Failed to prepare statement.";
-		} else {
-			$stmt->bind_param("ss", $username, $password); // bind params
-			$stmt->execute(); // execute the statement
-			$stmt->bind_result($cid); // bind result variable
-			
-			/* Query should only return 1 row if the username and password are correct. */
-			$count = 0;
-			while($stmt->fetch()) {
-				$count++;
-			}
-	
-			if($count == 1) {
-				// delete everythig from user session lol
-				$deletesql = "DELETE FROM UserSession;";
-				$stmt1 = $conn->prepare($deletesql);
-				if(!$stmt1->prepare($deletesql)) {
-					echo "Failed to prepare statement.";
-				} else {
-					$stmt1->execute();
-				}
-				
-				// then add into user session
-				$sql = "INSERT INTO UserSession(cid, referralURL) VALUES (?, ?);";//needs to update user session in db to store 
-				$stmt2 = $conn->prepare($sql);
-				if(!$stmt2->prepare($sql)) {
-					echo "Failed to prepare statement.";
-				} else {
-					echo $_SESSION["last_page"];
-					$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
-					$stmt2->execute();
-				}
-				
-				$last_page = $_SESSION["last_page"];
-				// re direct to what we just stored in the database... that moment when you realize you didnt have to do any of the above and could have just used the session 
-				header("Location: $last_page");
-				
-			} else {
-				echo "<br>Your Username or Password is invalid.";
-			}
 		}
-		$stmt->close();
-		$conn->close();
+	
+		if(!empty($_GET["username"]) && !empty($_GET["password"])) {
+			/* Read in parameters */
+			$username = $_GET["username"];
+			$password = $_GET["password"];
 		
-		/*******************TODO: add code to check if user is an admin ***************/
+			$query = "SELECT cid FROM AccountHolder WHERE username = ? AND password = ?";
+		
+			// connection information
+			$server = "cosc304.ok.ubc.ca";
+			$uid = "group6";
+			$pw = "group6";
+			$db = "db_group6";
+		
+			// connect
+			$conn = new mysqli($server, $uid, $pw, $db);
+			
+			// check connection
+			if($conn->connect_error)
+				echo "Failed to connect to server: " . $conn->connect_error;
+		
+			$stmt = $conn->stmt_init();
+			if(!$stmt->prepare($query)) {
+				echo "Failed to prepare statement.";
+			} else {
+				$stmt->bind_param("ss", $username, $password); // bind params
+				$stmt->execute(); // execute the statement
+				$stmt->bind_result($cid); // bind result variable
+				
+				/* Query should only return 1 row if the username and password are correct. */
+				$count = 0;
+				while($stmt->fetch()) {
+					$count++;
+				}
+		
+				if($count == 1) {
+					// delete everythig from user session lol
+					$deletesql = "DELETE FROM UserSession;";
+					$stmt1 = $conn->prepare($deletesql);
+					if(!$stmt1->prepare($deletesql)) {
+						echo "Failed to prepare statement.";
+					} else {
+						$stmt1->execute();
+					}
+					
+					// then add into user session
+					$sql = "INSERT INTO UserSession(cid, referralURL) VALUES (?, ?);";//needs to update user session in db to store 
+					$stmt2 = $conn->prepare($sql);
+					if(!$stmt2->prepare($sql)) {
+						echo "Failed to prepare statement.";
+					} else {
+						echo $_SESSION["last_page"];
+						$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
+						$stmt2->execute();
+					}
+					
+					$last_page = $_SESSION["last_page"]; // get the last page so can redirect to it after logging in
+					
+					/* Store cid and username in PHP session so can tell if user is logged in on other pages */
+					$_SESSION["cid"] = $cid;
+					$_SESSION["username"] = $username;
+					
+					/* Store session attributes in JSP session as well hahahha */
+					header("Location: setjspsesh.jsp?cid=$cid&username=$username&last=$last_page"); // jsp code will re direct to last page as well
+					
+				} else {
+					echo "<br>Your Username or Password is invalid.";
+				}
+			}
+			$stmt->close();
+			$conn->close();
+			
+			/*******************TODO: add code to check if user is an admin ***************/
+			
+			
+		} else { // if the user provided no input COLIN FIX THIS
+			//echo "Please input a username and password.";
+		}
 		
 		
-	} else { // if the user provided no input COLIN FIX THIS
-		//echo "Please input a username and password.";
 	}
+	
+	
 	
 
 ?>
