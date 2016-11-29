@@ -13,6 +13,16 @@
 </HEAD>
 <BODY>
 <div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div style="float: left;">
+<%
+if(session.getAttribute("username") != null) {
+	String username = (String)session.getAttribute("username");
+	out.println("Logged in as "+username+" <span><a href=\"logout.php\">Logout</a></span>");
+} else {
+	out.println("Logged in as Guest");
+}
+%>
+</div>
 <div class = "content"><center><br><br>
 <script>
 function update(newpid, newqty)
@@ -21,6 +31,7 @@ function update(newpid, newqty)
 }
 
 </script>
+
 <FORM name="form1">
 
 <%
