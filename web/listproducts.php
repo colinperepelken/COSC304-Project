@@ -23,13 +23,14 @@
 <p></p>
 
 <form method="get" action="listproducts.php">
+	(Leave blank for all products)
+	<br>
+	<input type="text" name="productName" size="50">
+	<input type="submit" value="Search" id="submit"> 
+	<br>
 	<input type="checkbox" checked="true" name="clothing" value="1">Clothing
 	<input type="checkbox" checked="true" name="accessories" value="2">Accessories
 	<input type="checkbox" checked="true" name="music" value="3">Music
-	<input type="text" name="productName" size="50">
-	<input type="submit" value="Search" id="submit"> 
-	<br><br>
-	(Leave blank for all products)
 </form>
 
 <?php
