@@ -159,7 +159,7 @@ try {
 		out.println("<option value=\"United States\">United States</option>");
 		out.println("</select></td></tr>");
 		
-		out.println("<tr><td>State/Province:</td></tr><tr><td><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
+		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
 		out.println("<input type='hidden' name='province'>");
 
 
