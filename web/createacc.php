@@ -29,6 +29,8 @@
 <p></p>
 
 <?php
+	session_start();
+	
 	error_reporting(-1); // report all PHP errors 
 	ini_set('display_errors', 1);
 	
@@ -62,8 +64,30 @@
 		} else {
 			$stmt->bind_param("sssss", $username, $password, $email, $name, $date); // bind params
 			$stmt->execute(); // execute statement
-			header("location: welcome.html"); // redirect browser to welcome page
 			
+			
+			/* 	LOG IN THE USER ACCOUNT THAT WAS JUST CREATED
+			get cid of user that was just inserted */
+			$query = "SELECT cid FROM AccountHolder WHERE username = ? AND password = ?";
+			$stmt2 = $conn->stmt_init();
+			if(!$stmt2->prepare($query)) {
+				echo "Failed to prepare statement.";
+			} else {
+				$stmt2->bind_param("ss", $username, $password); // bind params
+				$stmt2->execute(); // execute the statement
+				$stmt2->bind_result($cid); // bind result variable
+				
+				while($stmt2->fetch()) {} // fetch results
+			
+			
+			/* Store cid and username in PHP session so can tell if user is logged in on other pages */
+			$_SESSION["cid"] = $cid;
+			$_SESSION["username"] = $username;
+			
+			$last_page = "home.html"; // re direct to home page after creating an account.
+			/* Store session attributes in JSP session as well hahahha */
+			header("Location: setjspsesh.jsp?cid=$cid&username=$username&last=$last_page"); // jsp code will re direct to last page as well
+			}
 		}
 		$conn->close();
 	}

@@ -26,6 +26,10 @@
 	if(isset($_SESSION["cid"])) {
 		$username = $_SESSION["username"];
 		echo "Logged in as $username <span><a href=\"logout.php\">Logout</a></span>";
+		$isAdmin = $_SESSION["isAdmin"];
+		if($isAdmin == "true") {
+			echo "<br><span><a href=\"admin.php\">Admin Controls</a></span>";
+		}
 	} else {
 		echo "Logged in as Guest";
 	}
@@ -127,7 +131,7 @@
 				$msg = "<span><a href=\"addcart.jsp?pid=$pid&pname=$pname&cost=$cost&qty=1\">Add to Cart</a></span>";
 			}
 			
-			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" alt=\"Product Image\"></a>
+			echo "<td><a href=\"preview.jsp?pid=$pid\"><img src=\"images/products/$image\" height =\"200px\" alt=\"Product Image\"></a>
 			<p><b>$pname</b></p><p>\$$cost</p><p>$msg</p></td>";
 			echo $count%3==0?"</tr><tr>":""; // 3 per row
  -			$count++;

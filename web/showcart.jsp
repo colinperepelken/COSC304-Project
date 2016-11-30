@@ -47,9 +47,7 @@ String newqty = request.getParameter("newqty");
 if (itemList == null){
 	out.println("<H1>Your shopping cart is empty!</H1>");
 	itemList = new HashMap();
-}
-else if(itemList.isEmpty())
-{	
+} else if(itemList.isEmpty()) {	
 	out.println("<H1>Your shopping cart is empty!</H1>");
 }
 
@@ -100,10 +98,10 @@ else
 		out.print("<TD ALIGN=RIGHT>"+currFormat.format(pr)+"</TD>");
 		out.print("<TD ALIGN=RIGHT>"+currFormat.format(pr*qty)+"</TD>");
 		// allow the customer to delete items from their shopping cart by clicking here
-		out.println("<TD>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF=\"showcart.jsp?delete="
-			+product.get(0)+"\">Remove Item from Cart</A></TD>");
+		out.println("<TD>&nbsp;&nbsp;&nbsp;&nbsp;<span><A HREF=\"showcart.jsp?delete="
+			+product.get(0)+"\">Remove Item from Cart</A></span></TD>");
 		// allow customer to change quantities for a product in their shopping cart
-		out.println("<TD>&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE=BUTTON OnClick=\"update("
+		out.println("<TD>&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE=BUTTON id=\"submit\" OnClick=\"update("
 			+product.get(0)+", document.form1.newqty"+count+".value)\" VALUE=\"Update Quantity\">");
 		out.println("</TR>");
 		// keep a running total for all items ordered
@@ -128,9 +126,16 @@ if(location.href != "http://cosc304.ok.ubc.ca/group6/tomcat/showcart.jsp"){
 <br>
 <span><a HREF="listproducts.php">Continue Shopping</a></span>
 <br>
-<span><a HREF="checkout.jsp">Check Out</a></span>
+
+<%
+if (itemList != null && !itemList.isEmpty()){
+	out.println("<span><a HREF='checkout.jsp'>Check Out</a></span>");
+}
+%>
+
 </FORM>
 <br>
+
 </center>
 </div></div>
 

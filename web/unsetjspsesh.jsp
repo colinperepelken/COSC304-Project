@@ -2,6 +2,7 @@
 	// log out
 	session.removeAttribute("cid");
 	session.removeAttribute("username");
+	session.removeAttribute("isAdmin");
 	
 	// go back to prev page
 	String last_page = request.getParameter("last");
