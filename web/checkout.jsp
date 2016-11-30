@@ -15,7 +15,7 @@
 	function printState(country) {
 		var stateSelect = '';
 		if(country == "United States"){
-			stateSelect = '<select name="region" id="region" >'+
+			stateSelect = '<select name="region" id="region" onchange="set(this.value)">'+
 			'<option value="AK">AK-Alaska</option>'+
 			'<option value="AL">AL-Alabama</option>'+
 			'<option value="AR">AR-Arkansas</option>'+
@@ -68,32 +68,36 @@
 			'<option value="WV">WV-West Virginia</option>'+
 			'<option value="WY">WY-Wyoming</option>'+
 			'</select>';
-	}
-	else if (country == 'Canada') {
-		stateSelect = '<select name="region" id="region">' +
-		'<option value="AB">AB-Alberta</option>' +
-		'<option value="BC">BC-British Columbia</option>' +
-		'<option value="MB">MB-Manitoba</option>'+
-		'<option value="NB">NB-New Brunswick</option>'+
-		'<option value="NL">NL-Newfoundland and Labrador</option>'+
-		'<option value="NT">NT-Northwest Territories</option>'+
-		'<option value="NS">NS-Nova Scotia</option>'+
-		'<option value="NU">NU-Nunavut</option>'+
-		'<option value="ON">ON-Ontario</option>'+
-		'<option value="PE">PE-Prince Edward Island</option>'+
-		'<option value="QC">QC-Quebec</option>'+
-		'<option value="SK">SK-Saskatchewan</option>'+
-		'<option value="YT">YT-Yukon</option>'+
-		'</select>';
-	}
-	else {
-		stateSelect = '<select name="region" id="region" disabled="disable">'+
-		'<option value="Other">Select Province/State</option>'+
-		'</select>';
-	}
-	document.getElementById('stateSelect').innerHTML = stateSelect;
+		}
+		else if (country == 'Canada') {
+			stateSelect = '<select name="region" id="region" onchange="set(this.value)">' +
+			'<option value="AB">AB-Alberta</option>' +
+			'<option value="BC">BC-British Columbia</option>' +
+			'<option value="MB">MB-Manitoba</option>'+
+			'<option value="NB">NB-New Brunswick</option>'+
+			'<option value="NL">NL-Newfoundland and Labrador</option>'+
+			'<option value="NT">NT-Northwest Territories</option>'+
+			'<option value="NS">NS-Nova Scotia</option>'+
+			'<option value="NU">NU-Nunavut</option>'+
+			'<option value="ON">ON-Ontario</option>'+
+			'<option value="PE">PE-Prince Edward Island</option>'+
+			'<option value="QC">QC-Quebec</option>'+
+			'<option value="SK">SK-Saskatchewan</option>'+
+			'<option value="YT">YT-Yukon</option>'+
+			'</select>';
+		}
+		else {
+			stateSelect = '<select name="region" id="region" disabled="disable">'+
+			'<option value="Other">Select Province/State</option>'+
+			'</select>';
+		}
+		document.getElementById('stateSelect').innerHTML = stateSelect;
 		
 	}
+	function set(region){
+		document.getElementById('province').value= region;
+	}
+
 	</script>
 </head>
 <body>
@@ -153,7 +157,7 @@ try {
 		out.println("</select></td></tr>");
 		
 		out.println("<tr><td>State/Province:</td></tr><tr><td><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
-
+		out.println("<input type='hidden' name='province'>");
 		
 		out.println("Street:<br><input type='text' name='address'><br>");
 		out.println("City:<br><input type='text' name='city'></td></tr>");

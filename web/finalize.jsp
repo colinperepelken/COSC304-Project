@@ -24,7 +24,7 @@ try {
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	String country = request.getParameter("country");
-	String region = request.getParameter("region");
+	String region = request.getParameter("province");
 	String city = request.getParameter("city");
 	
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
