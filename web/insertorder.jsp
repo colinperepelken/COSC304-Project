@@ -22,7 +22,7 @@ try {
 	getConnection();
 	//get parameters
 	Integer cid = Integer.parseInt((String)session.getAttribute("cid"));
-	String shipAddress = request.getParameter("address");
+	String shipAddress = request.getParameter("street");
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	double shipCost = Double.parseDouble(request.getParameter("shipCost"));
@@ -39,6 +39,8 @@ try {
 	PreparedStatement pstmt = null;
 	if(itemList==null){
 		out.println("<h1>2Kyle16 thanks you for your order!</h1>");
+		out.println("<br><span><a href='home.html'>Home</a></span>");
+
 	}
 	else{
 		
@@ -89,6 +91,7 @@ try {
 		pstmt.setDouble(11,payCost);
 		pstmt.setInt(12,orderId);
 		pstmt.setInt(13,cid);
+		pstmt.executeUpdate();
 		session.setAttribute("itemList", null);  
 		out.println("<h1><b>2Kyle16 thanks you for your order!</b></h1>");
 		out.println("<br><span><a href='home.html'>Home</a></span>");

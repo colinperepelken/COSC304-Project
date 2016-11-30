@@ -24,7 +24,7 @@ try {
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	String country = request.getParameter("country");
-	String province = request.getParameter("province");
+	String province = request.getParameter("region");
 	String city = request.getParameter("city");
 	
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
@@ -73,7 +73,7 @@ try {
 	out.println("<tr><td align='left'>Payment Method: " + payType + "</td><tr>");
 
 	
-	out.println("</table><form method='post' action='insertorder.jsp'>");//TODO: add form data location
+	out.println("</table><form method='get' action='insertorder.jsp'>");//TODO: add form data location
 	out.println("<input name='grandTotal' type='hidden' value='"+orderTotal+"'>");
 	out.println("<input name='street' type='hidden' value='"+shipAddress+"'>");
 	out.println("<input name='city' type='hidden' value='"+city+"'>");
