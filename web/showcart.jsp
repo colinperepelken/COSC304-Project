@@ -66,7 +66,8 @@ else
 	if(update != null && (!update.equals(""))) {
 		if (itemList.containsKey(update)) { // find item in shopping cart
 			product = (ArrayList) itemList.get(update);
-			product.set(3, (new Integer(newqty))); // change quantity to new quantity
+			if(new Integer(newqty)<=100 && new Integer(newqty)>0)
+				product.set(3, (new Integer(newqty))); // change quantity to new quantity
 		}
 		else {
 			itemList.put(pid,product);
@@ -89,7 +90,7 @@ else
 		// read in values for that product pid
 		out.print("<TD>"+product.get(1)+"</TD>");
 
-		out.print("<TD ALIGN=CENTER><INPUT TYPE=\"text\" name=\"newqty"+count+"\" size=\"3\" value=\""
+		out.print("<TD ALIGN=CENTER><INPUT TYPE=\"number\" min=\"1\" max=\"100\" name=\"newqty"+count+"\" size=\"3\" value=\""
 			+product.get(3)+"\"></TD>");
 		double pr = Double.parseDouble( (String) product.get(2));
 		int qty = ( (Integer)product.get(3)).intValue();

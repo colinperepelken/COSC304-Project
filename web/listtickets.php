@@ -12,12 +12,12 @@
 </script>
 
 <script>
-	function checkQuantity(max, id, pname, cost, count) {
+	function checkQuantity(max, id, pid, pname, cost, count) {
 		var v = document.getElementById(id).value;
 		if(parseInt(v) >= max){
 			alert("Your quantity is too high, we dont even have that many tickets you greedy bastard!");
 		} else {
-			addcart(id, pname, cost, count)
+			addcart(pid, pname, cost, count)
 		}				
 	}
 </script>
@@ -93,7 +93,7 @@
 				$msg = "<tr><td><input type='number' class='numberBox' id='number$count' 
 						value='1' id='qty' size='1' min='1' max='$inventory'>";
 				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" 
-						onclick=\"checkQuantity(&#34;$inventory&#34;, &#34;number$count&#34;,&#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
+						onclick=\"checkQuantity(&#34;$inventory&#34;, &#34;number$count&#34;,&#34;$pid&#34;,&#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
 				
 			}
 			echo "<br><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\">

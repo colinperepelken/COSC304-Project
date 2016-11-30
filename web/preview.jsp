@@ -7,11 +7,16 @@
 <head>
 	<title>2Kyle16 Store</title>
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
+	<link rel="icon" href="images/favicon.png">
+
 	<script>
 		function addcart(pid, pname, cost) {
 			qty = document.getElementById('number').value;
 			if(!(qty=="" || qty==null)){
-				window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + qty + "&cost=" + cost;
+				if(parseInt(qty) > 0 && parseInt(qty) <= 100)
+					window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + qty + "&cost=" + cost;
+				else
+					alert("Please enter a value between 1 and 100.")
 			}
 		}
 	</script>
@@ -53,7 +58,7 @@
 				out.println("<tr><td>Out of Stock</td><tr>");
 			}else{
 				out.println("<tr><td>" + currFormat.format(cost) + "</td></tr>"); // next line is addcart as submit button, gets info from text box
-				out.println("<tr><td><input type='number' class='numberBox' value='1' id='qty' size='1' min='1' max='100'>");
+				out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1' max='100'>");
 				out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
 			}
 			out.println("</table></td>");
