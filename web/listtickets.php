@@ -3,12 +3,25 @@
 <head>
 <title>2Kyle16 Tickets</title>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
+<link rel="icon" href="images/favicon.png">
+
 <script>
 	function addcart(pid, pname, cost, id) {
 		window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + document.getElementById(id).value + "&cost=" + cost;
-
 	}
 </script>
+
+<script>
+	function checkQuantity(max, id, pname, cost, count) {
+		var v = document.getElementById(id).value;
+		if(parseInt(v) >= max){
+			alert("Your quantity is too high, we dont even have that many tickets you greedy bastard!");
+		} else {
+			addcart(id, pname, cost, count)
+		}				
+	}
+</script>
+
 </head>
 <body>
 <div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a></font></div>
@@ -77,9 +90,10 @@
 			if($inventory=="0") {
 				$msg = "Sold out";
 			} else {
-				$msg = "<tr><td><input type='number' class='numberBox' id='number$count' value='1' id='qty' size='1' min='1'>";
+				$msg = "<tr><td><input type='number' class='numberBox' id='number$count' 
+						value='1' id='qty' size='1' min='1' max='$inventory'>";
 				$msg .= "<input type=\"button\" id=\"submit\" value=\"Add to Cart\" 
-					onclick=\"addcart(&#34;$pid&#34;, &#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
+						onclick=\"checkQuantity(&#34;$inventory&#34;, &#34;number$count&#34;,&#34;$pname&#34;, &#34;$cost&#34;, &#34;number$count&#34;)\"></td></tr>";
 				
 			}
 			echo "<br><img src=\"images/tickets/$image\" alt=\"Ticket Image\" style=\"float:left\">

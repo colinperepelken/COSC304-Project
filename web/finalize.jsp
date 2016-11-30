@@ -11,11 +11,14 @@
 <head>
 	<title>Checkout</title>
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
+	<link rel="icon" href="images/favicon.png">
 	<script>
 	</script>
 </head>
 <body>
-
+<div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
 <%
 try {
 	getConnection();
@@ -24,14 +27,14 @@ try {
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	String country = request.getParameter("country");
-	String province = request.getParameter("province");
+	String region = request.getParameter("province");
 	String city = request.getParameter("city");
 	
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 	PreparedStatement pstmt = null;
-	out.println("<h1>Place Order</h1><p>Are these details correct?</p>");
+	out.println("<h1>Place Order</h1><p>Please ensure the following information is correct.</p>");
 	
-	out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
+	out.println("<table><tr><th>Product Id</th><th align=\"left\">Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
 	double total = 0;
 	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
@@ -43,7 +46,7 @@ try {
 		ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
 		String productId = (String) product.get(0);
 		out.print("<tr><td>"+productId+"</td>");
-		out.print("<td>"+product.get(1)+"</td>");
+		out.print("<td align=\"left\">"+product.get(1)+"</td>");
 		out.print("<td align=\"center\">"+product.get(3)+"</td>");
 		String price = (String) product.get(2);
 		double pr = Double.parseDouble(price);
@@ -70,20 +73,20 @@ try {
 	
 	double orderTotal = shipCost + tax + total;
 	out.println("<tr><td colspan=\"4\" align=\"right\">Order Total: </td><td align=\"right\">"+currFormat.format(orderTotal)+"</td></tr>");
-	out.println("<tr><td align='left'>Payment Method: " + payType + "</td><tr>");
+	out.println("<tr><td align='left'><br>Payment Method: " + payType + "</td><tr>");
 
 	
-	out.println("</table><form method='post' action='insertorder.jsp'>");//TODO: add form data location
+	out.println("</table><form method='get' action='insertorder.jsp'>");//TODO: add form data location
 	out.println("<input name='grandTotal' type='hidden' value='"+orderTotal+"'>");
 	out.println("<input name='street' type='hidden' value='"+shipAddress+"'>");
 	out.println("<input name='city' type='hidden' value='"+city+"'>");
-	out.println("<input name='province' type='hidden' value='"+province+"'>");
+	out.println("<input name='region' type='hidden' value='"+region+"'>");
 	out.println("<input name='country' type='hidden' value='"+country+"'>");
 	out.println("<input name='shipType' type='hidden' value='"+shipType+"'>");
 	out.println("<input name='payType' type='hidden' value='"+payType+"'>");
 	out.println("<input name='shipCost' type='hidden' value='"+shipCost+"'>");
 	out.println("<input name='cartTotal' type='hidden' value='"+total+"'>");
-	out.println("<input id='submit' type='submit' value='Place Order'>");
+	out.println("<br><input id='submit' type='submit' value='Place Order'>");
 
 	out.println("</form>");
 
@@ -96,6 +99,10 @@ try {
 }
 	
 %>                       				
+</center>
+</div></div>
+
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 
 
 </body>

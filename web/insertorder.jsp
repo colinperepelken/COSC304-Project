@@ -11,24 +11,27 @@
 <head>
 	<title>Checkout</title>
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
+	<link rel="icon" href="images/favicon.png">
 	<script>
 	</script>
 </head>
 <body>
-
+<div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
 <%
 try {
 	
 	getConnection();
 	//get parameters
 	Integer cid = Integer.parseInt((String)session.getAttribute("cid"));
-	String shipAddress = request.getParameter("address");
+	String shipAddress = request.getParameter("street");
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	double shipCost = Double.parseDouble(request.getParameter("shipCost"));
 	double cartTotal = Double.parseDouble(request.getParameter("cartTotal"));
 	double payCost = Double.parseDouble(request.getParameter("grandTotal"));
-	String province = request.getParameter("province");
+	String province = request.getParameter("region");
 	String country = request.getParameter("country");
 	String city = request.getParameter("city");
 
@@ -39,6 +42,7 @@ try {
 	PreparedStatement pstmt = null;
 	if(itemList==null){
 		out.println("<h1>2Kyle16 thanks you for your order!</h1>");
+
 	}
 	else{
 		
@@ -89,9 +93,9 @@ try {
 		pstmt.setDouble(11,payCost);
 		pstmt.setInt(12,orderId);
 		pstmt.setInt(13,cid);
+		pstmt.executeUpdate();
 		session.setAttribute("itemList", null);  
 		out.println("<h1><b>2Kyle16 thanks you for your order!</b></h1>");
-		out.println("<br><span><a href='home.html'>Home</a></span>");
 	}
 }catch(SQLException e){
 	out.println(e);
@@ -101,6 +105,9 @@ try {
 	
 %>                       				
 
+</center>
+</div></div>
 
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>
