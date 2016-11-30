@@ -3,6 +3,8 @@
 <head>
 <title>2Kyle16 Tickets</title>
 <link rel="stylesheet" type="text/css" href="2kyle16.css">
+<link rel="icon" href="images/favicon.png">
+
 <script>
 	function addcart(pid, pname, cost, id) {
 		window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + document.getElementById(id).value + "&cost=" + cost;
