@@ -182,6 +182,34 @@
 				}
 			
 
+			/* DELETE A PRODUCT */
+			} else if(isset($_GET["delete"])) {
+				
+				if(isset($_GET["pid"])) { // if a pid to delete is specified then delete it
+					$pid = $_GET["pid"];
+					$sql = "DELETE FROM Product WHERE pid=?;";
+					$stmt = $conn->stmt_init();
+					if(!$stmt->prepare($sql)) {
+						echo "Failed to prepare statement.";
+					} else {
+						$stmt->bind_param("i", $pid);
+						$stmt->execute();
+						header("Location: admin.php");
+					}
+					
+				} else { // else show the list of products
+					$sql = "SELECT pid, pname FROM Product;";
+					$result = $conn->query($sql);
+					if ($result->num_rows > 0) {
+						echo "<table><tr><td></td><td><b>pid </b></td><td><b>pname</b></td></tr>";
+						// output data of each row
+						while($row = $result->fetch_assoc()) {
+							$pid = $row["pid"];
+							echo "<tr><td><span><a href=\"admin.php?delete=1&pid=$pid\">Delete</a></span></td><td>".$row["pid"]."</td><td>".$row["pname"]."</td></tr>";
+						}
+						echo "</table>";
+					} 
+				}
 			
 			}
 			
