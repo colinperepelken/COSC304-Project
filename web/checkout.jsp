@@ -16,16 +16,22 @@
 </head>
 <body>
 
+<div style="float: left;">
+<%
+if(session.getAttribute("username") != null) {
+	String username = (String)session.getAttribute("username");
+	out.println("Logged in as "+username+" <span><a href=\"logout.php\">Logout</a></span>");
+} else {
+	out.println("Logged in as Guest");
+}
+%>
+</div>
 <%
 try {
 	getConnection();
-	String sql = "SELECT cid FROM UserSession";
-	ResultSet sesh = con.createStatement().executeQuery(sql);
-	if(sesh.first()){
-		Integer cid = (Integer) sesh.getInt(1);
+	if(session.getAttribute("username")!=null){
 		HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 		PreparedStatement pstmt = null;
-		
 		out.println("<h1>Your Order Summary</h1>");
 		out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
@@ -57,10 +63,25 @@ try {
 		ResultSet pays = pstmt.executeQuery();
 		
 		out.println("<form action='finalize.jsp'>");
-		out.println("<tr><td><p>Enter your shipping address:</p>");
-		out.println("<input type='text' name='address'><tr><td>");
+		out.println("<tr><td>Enter your shipping address:<br>");
+		out.println("Street:<br><input type='text' name='address'><br>");
+		out.println("City:<br><input type='text' name='city'></td></tr>");
 		
+		out.println("<tr><td>Province:</td></tr><tr><td><select name='province'>");
+		String[] provinces = {"AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"};
+		for(String p:provinces){
+			out.println("<option value=\""+p+"\">"+p+"</option>");
+		}
+		out.println("</select></td></tr>");	
+		
+		out.println("<tr><td>Country:</td></tr><tr><td><select name='country'>");
+		out.println("<option value=\"United Kingdom\">United Kindom</option>");
+		out.println("<option value=\"Canada\">Canada</option>");
+		out.println("<option value=\"United States\">United States</option>");
+		out.println("</select></td></tr>");
+
 		// prints radio buttons for shipping and payment
+		out.println("<tr><td>");
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
