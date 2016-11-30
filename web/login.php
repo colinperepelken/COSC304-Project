@@ -37,6 +37,11 @@ session_start();
 	if(isset($_SESSION["username"])) {
 		$username = $_SESSION["username"];
 		echo "<p>Already logged in as $username <span><a href=\"logout.php\">Logout</a></span></p>"; // user is already logged in
+		if(isset($_SESSION["isAdmin"])) { // check if user is admin user
+			if($_SESSION["isAdmin"] == "true") {
+				echo "<br><span><a href=\"admin.php\">Admin Controls</a></span>";
+			}
+		}
 	} else {
 		// not logged in, display login form
 		echo "<form method=\"get\" action=\"login.php\">
