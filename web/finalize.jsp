@@ -24,7 +24,7 @@ try {
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
 	String country = request.getParameter("country");
-	String province = request.getParameter("region");
+	String region = request.getParameter("region");
 	String city = request.getParameter("city");
 	
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
@@ -77,7 +77,7 @@ try {
 	out.println("<input name='grandTotal' type='hidden' value='"+orderTotal+"'>");
 	out.println("<input name='street' type='hidden' value='"+shipAddress+"'>");
 	out.println("<input name='city' type='hidden' value='"+city+"'>");
-	out.println("<input name='province' type='hidden' value='"+province+"'>");
+	out.println("<input name='region' type='hidden' value='"+region+"'>");
 	out.println("<input name='country' type='hidden' value='"+country+"'>");
 	out.println("<input name='shipType' type='hidden' value='"+shipType+"'>");
 	out.println("<input name='payType' type='hidden' value='"+payType+"'>");

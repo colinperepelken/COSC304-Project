@@ -28,7 +28,7 @@ try {
 	double shipCost = Double.parseDouble(request.getParameter("shipCost"));
 	double cartTotal = Double.parseDouble(request.getParameter("cartTotal"));
 	double payCost = Double.parseDouble(request.getParameter("grandTotal"));
-	String province = request.getParameter("province");
+	String province = request.getParameter("region");
 	String country = request.getParameter("country");
 	String city = request.getParameter("city");
 
