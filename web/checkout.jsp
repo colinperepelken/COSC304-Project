@@ -15,7 +15,7 @@
 	function printState(country) {
 		var stateSelect = '';
 		if(country == "United States"){
-			stateSelect = '<select name="region" id="region" onchange="set(this.value)">'+
+			stateSelect = '<select name="region" id="region" form="shipping" onchange="set(this.value)">'+
 			'<option value="AK">AK-Alaska</option>'+
 			'<option value="AL">AL-Alabama</option>'+
 			'<option value="AR">AR-Arkansas</option>'+
@@ -70,7 +70,7 @@
 			'</select>';
 		}
 		else if (country == 'Canada') {
-			stateSelect = '<select name="region" id="region" onchange="set(this.value)">' +
+			stateSelect = '<select name="region" id="region" form="shipping" onchange="set(this.value)">' +
 			'<option value="AB">AB-Alberta</option>' +
 			'<option value="BC">BC-British Columbia</option>' +
 			'<option value="MB">MB-Manitoba</option>'+
@@ -95,7 +95,7 @@
 		
 	}
 	function set(region){
-		document.getElementById('province').value= region;
+		//document.getElementById('province').value= region;
 	}
 
 	</script>
@@ -151,7 +151,7 @@ try {
 		pstmt = con.prepareStatement("SELECT * FROM PaymentMethod");
 		ResultSet pays = pstmt.executeQuery();
 		
-		out.println("<form action='finalize.jsp'>");
+		out.println("<form id='shipping' action='finalize.jsp'>");
 		out.println("<tr><td><br><br>Enter your shipping address:<br><br>");
 		out.println("<tr><td align=\"left\">Country:</td></tr><tr><td align=\"left\"><select name='country' id='country' onchange='printState(this.value)'>");
 		out.println("<option value=\"Select\">Select a Country...</option>");
@@ -160,7 +160,7 @@ try {
 		out.println("</select></td></tr>");
 		
 		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
-		out.println("<input type='hidden' name='province'>");
+		//out.println("<input type='hidden' name='province'>");
 
 
 		
