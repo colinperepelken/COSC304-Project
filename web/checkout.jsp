@@ -97,7 +97,9 @@
 	</script>
 </head>
 <body>
-
+<div class = "mainDiv"><div id ="header"><img src="images/header.png"><br><font size="5.5"><a href="home.html">HOME </a>  <a href="listproducts.php">MERCH</a> <a href="listtickets.php">TICKETS</a>  <a href="showcart.jsp">CART</a> <a href="login.php">LOGIN</a> </font></div>
+<div class = "content">
+<center>
 <div style="float: left;">
 <%
 if(session.getAttribute("username") != null) {
@@ -108,6 +110,7 @@ if(session.getAttribute("username") != null) {
 }
 %>
 </div>
+<br><br>
 <%
 try {
 	getConnection();
@@ -145,38 +148,38 @@ try {
 		ResultSet pays = pstmt.executeQuery();
 		
 		out.println("<form action='finalize.jsp'>");
-		out.println("<tr><td>Enter your shipping address:<br>");
-		out.println("<tr><td>Country:</td></tr><tr><td><select name='country' id='country' onchange='printState(this.value)'>");
+		out.println("<tr><td><br><br>Enter your shipping address:<br><br>");
+		out.println("<tr><td align=\"left\">Country:</td></tr><tr><td align=\"left\"><select name='country' id='country' onchange='printState(this.value)'>");
 		out.println("<option value=\"Select\">Select a Country...</option>");
 		out.println("<option value=\"Canada\">Canada</option>");
 		out.println("<option value=\"United States\">United States</option>");
 		out.println("</select></td></tr>");
 		
-		out.println("<tr><td>State/Province:</td></tr><tr><td><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
+		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
 
 		
 		out.println("Street:<br><input type='text' name='address'><br>");
-		out.println("City:<br><input type='text' name='city'></td></tr>");
+		out.println("City:<br><input type='text' name='city'><br><br></td></tr>");
 		
 		
 		
 		//TODO: validate country/ region selection
 
 		// prints radio buttons for shipping and payment
-		out.println("<tr><td>");
+		out.println("<tr><td align=\"left\">Shipping:<br>");
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
 			out.println("<input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
 		}
-		out.println("</td><td>");
+		out.println("</td><td align=\"left\">Payment Type:<br>");
 		while(pays.next()){
 			String type = pays.getString(1);
 			out.println("<input name='payType' type='radio' value=\""+ type +"\">" + type+"<br>");
 		}
 		
 		out.println("</td></table>");
-		out.println("<input id='submit' type='submit' value='Confirm'>");
+		out.println("<br><br><input id='submit' type='submit' value='Confirm'>");
 		out.println("</form>");
 
 		//button to go to next page, where info is then entered into database
@@ -192,6 +195,9 @@ try {
 	
 %>                       				
 
+</center>
+</div></div>
 
+<div id = "footer"><br><br> &copy; 2016 2Kyle16 inc. <br>Site by Brittany Miller, Maria Guenter, Colin Bernard, Zachery Grafton and Mackenzie Salloum</div>
 </body>
 </html>
