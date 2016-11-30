@@ -11,6 +11,7 @@
 <head>
 	<title>Checkout</title>
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
+	<link rel="icon" href="images/favicon.png">
 	<script>
 	</script>
 </head>
