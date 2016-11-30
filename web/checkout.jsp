@@ -123,7 +123,7 @@ try {
 		HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 		PreparedStatement pstmt = null;
 		out.println("<h1>Your Order Summary</h1>");
-		out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
+		out.println("<table><tr><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 
 		double total = 0;
 		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
@@ -133,8 +133,6 @@ try {
 		{ 
 			Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 			ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
-			String productId = (String) product.get(0);
-			out.print("<tr><td>"+productId+"</td>");
 			out.print("<td>"+product.get(1)+"</td>");
 			out.print("<td align=\"center\">"+product.get(3)+"</td>");
 			String price = (String) product.get(2);
@@ -145,7 +143,7 @@ try {
 			out.println("</tr>");
 			total = total +pr*qty;
 		}
-		out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td><td align=\"right\">"+currFormat.format(total)+"</td></tr>");
+		out.println("<tr><td colspan=\"3\" align=\"right\"><b>Order Total</b></td><td align=\"right\">"+currFormat.format(total)+"</td></tr>");
 		
 		pstmt = con.prepareStatement("SELECT * FROM ShippingOption");
 		ResultSet ships = pstmt.executeQuery();
