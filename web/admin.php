@@ -70,6 +70,26 @@
 				
 				echo "<br><br>";
 				
+				/*  --Top 3 Most Ordered Products-- */
+				echo "<b>Top 3 Most Ordered Products</b><br>";
+				$sql = "select Product.pname, Product.pid
+						from CustomerOrder, HasProduct, Product 
+						where Product.pid = HasProduct.pid and HasProduct.oid = CustomerOrder.oid
+						group by Product.pid
+						order by count(HasProduct.quantity)	desc limit 3;";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					echo "<table><tr><td>Name </td><td>PID</td></tr>";
+					// output data of each row
+					while($row = $result->fetch_assoc()) {
+						
+						echo "<tr><td>".$row["pname"]."</td><td>".$row["pid"]."</td></tr>";
+					}
+					echo "</table>";
+				} 
+				
+				echo "<br><br>";
+				
 				/*  --Average Customer Purchase Cost (Not Including Shipping Cost)-- */
 				echo "<b>Average Customer Purchase Cost (Not Including Shipping Cost)</b><br>";
 				$sql = "select avg(cartTotal) as averagePurchase 
