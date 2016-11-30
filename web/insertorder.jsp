@@ -41,7 +41,6 @@ try {
 	PreparedStatement pstmt = null;
 	if(itemList==null){
 		out.println("<h1>2Kyle16 thanks you for your order!</h1>");
-		out.println("<br><span><a href='home.html'>Home</a></span>");
 
 	}
 	else{
