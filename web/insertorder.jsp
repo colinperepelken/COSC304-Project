@@ -18,47 +18,81 @@
 
 <%
 try {
+	
 	getConnection();
 	//get parameters
+	Integer cid = Integer.parseInt((String)session.getAttribute("cid"));
 	String shipAddress = request.getParameter("address");
 	String shipType = request.getParameter("shipType");
 	String payType = request.getParameter("payType");
-	String shipCost = request.getParameter("shipCost")
-	String cartTotal = request.getParameter("cartTotal")
+	double shipCost = Double.parseDouble(request.getParameter("shipCost"));
+	double cartTotal = Double.parseDouble(request.getParameter("cartTotal"));
+	double payCost = Double.parseDouble(request.getParameter("grandTotal"));
+	String province = request.getParameter("province");
+	String country = request.getParameter("country");
+	String city = request.getParameter("city");
+
+	
+	
 
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 	PreparedStatement pstmt = null;
-	
-	out.println("<h1>Place Order</h1><p>Are these details correct?</p>");
-	out.println("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
-
-	String sql = "INSERT INTO CustomerOrder(cartTotal) VALUES (0)";
-	pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-   	pstmt.executeUpdate();
-   	ResultSet keys = pstmt.getGeneratedKeys();
-   	keys.next();
-   	int orderId = keys.getInt(1);
-	double total = 0;
-	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
-	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-	//TODO: insert into hasproduct
-	
-	while (iterator.hasNext())
-	{ 	
-		pstmt = con.prepareStatement("INSERT INTO HasProduct VALUES (?, ?)");
-		Map.Entry<String, ArrayList<Object>> entry = iterator.next();
-		ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
-		int pid = (Integer) product.get(0).intValue();
-		pstmt.setString(orderId, pid);
-		pstmt.executeUpdate();
+	if(itemList==null){
+		out.println("<h1>2Kyle16 thanks you for your order!</h1>");
 	}
-	
-	out.println("</table><form>");//TODO: add form data location
-	out.println("<input id='submit' type='submit' value='Place Order'>");
-	out.println("</form>");
-
+	else{
+		
 	
 
+		String sql = "INSERT INTO CustomerOrder(cid) VALUES (?)";
+		pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		pstmt.setInt(1, cid.intValue());
+		pstmt.executeUpdate();
+		ResultSet keys = pstmt.getGeneratedKeys();
+		keys.next();
+		int orderId = keys.getInt(1);
+		double total = 0;
+		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = itemList.entrySet().iterator();
+		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+		//TODO: insert into hasproduct
+		
+		while (iterator.hasNext())
+		{ 	
+			pstmt = con.prepareStatement("INSERT INTO HasProduct VALUES (?, ?, ?)");
+			Map.Entry<String, ArrayList<Object>> entry = iterator.next();
+			ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
+			int pid = Integer.parseInt((String)product.get(0));
+			int qty = ((Integer)product.get(3)).intValue();
+			pstmt.setInt(1, orderId);
+			pstmt.setInt(2, pid);
+			pstmt.setInt(3, qty);
+			pstmt.executeUpdate();
+		}
+		//TODO: insert into customer order
+		sql = "UPDATE CustomerOrder SET orderDate=?, street=?,city=?,province=?,country=?,hasShipped=?,cartTotal=?,shippingType=?,shippingCost=?,paymentType=?,paymentCost=? WHERE oid = ? AND cid = ?";
+		pstmt = con.prepareStatement(sql);
+		//get current date
+		java.util.Date orderDate = new java.util.Date(); 
+		java.sql.Date sqlDate = new java.sql.Date(orderDate.getTime());	
+		boolean hasShipped = false;
+		//set preparestatement vars
+		pstmt.setDate(1,sqlDate);
+		pstmt.setString(2,shipAddress);
+		pstmt.setString(3,city);
+		pstmt.setString(4,province);
+		pstmt.setString(5,country);
+		pstmt.setBoolean(6,hasShipped);
+		pstmt.setDouble(7,cartTotal);
+		pstmt.setString(8,shipType);
+		pstmt.setDouble(9,shipCost);
+		pstmt.setString(10,payType);
+		pstmt.setDouble(11,payCost);
+		pstmt.setInt(12,orderId);
+		pstmt.setInt(13,cid);
+		session.setAttribute("itemList", null);  
+		out.println("<h1><b>2Kyle16 thanks you for your order!</b></h1>");
+		out.println("<br><span><a href='home.html'>Home</a></span>");
+	}
 }catch(SQLException e){
 	out.println(e);
 }finally{
