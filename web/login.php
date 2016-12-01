@@ -44,7 +44,7 @@ session_start();
 		}
 	} else {
 		// not logged in, display login form
-		echo "<form method=\"get\" action=\"login.php\">
+		echo "<form method=\"post\" action=\"login.php\">
 	Username <input type=\"text\" name=\"username\" size=\"15\">
 	Password <input type=\"password\" name=\"password\" size=\"15\">
 	<input type=\"submit\" id=\"submit\" value=\"Login\">
@@ -55,10 +55,10 @@ session_start();
 		$_SESSION["last_page"] = $_SERVER['HTTP_REFERER'];
 		}
 	
-		if(isset($_GET["username"]) && isset($_GET["password"])) {
+		if(isset($_POST["username"]) && isset($_POST["password"])) {
 			/* Read in parameters */
-			$username = $_GET["username"];
-			$password = $_GET["password"];
+			$username = $_POST["username"];
+			$password = $_POST["password"];
 		
 			$query = "SELECT cid FROM AccountHolder WHERE username = ? AND password = ?";
 		

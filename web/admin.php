@@ -19,14 +19,6 @@
 	} 
 ?>
 </div>
-<br>
-<p><span><a href="admin.php?reports='1'">Generate Reports</a></span></p>
-<br>
-<p><span><a href="admin.php?add='1'">Add a Product</a></span></p>
-<br>
-<p><span><a href="admin.php?delete='1'">Delete a Product</a></span></p>
-<br>
-
 
 <?php
 	error_reporting(-1); // report all PHP errors 
@@ -36,6 +28,15 @@
 		$username = $_SESSION["username"];
 		$isAdmin = $_SESSION["isAdmin"];
 		if($isAdmin == "true") {
+			
+			//show form
+			echo "<br>
+					<p><span><a href=\"admin.php?reports='1'\">Generate Reports</a></span></p>
+					<br>
+					<p><span><a href=\"admin.php?add='1'\">Add a Product</a></span></p>
+					<br>
+					<p><span><a href=\"admin.php?delete='1'\">Delete a Product</a></span></p>
+					<br>";
 			
 			// connection information
 			$server = "cosc304.ok.ubc.ca";
@@ -235,12 +236,10 @@
 			
 			$conn->close(); // close the connection
 		} else {
-			$last_page = $_SERVER['HTTP_REFERER']; // go back if user is not an admin
-			header("Locaton: $last_page");
+			echo "Admin permissions are required to access this page! Get out!"; // deny access if user is not an admin 
 		}
 	} else {
-		$last_page = $_SERVER['HTTP_REFERER']; // go back if user is not logged in
-		header("Location: $last_page");
+		echo "Admin permissions are required to access this page! Get out!"; // deny access if not logged in
 	}
 ?>
 

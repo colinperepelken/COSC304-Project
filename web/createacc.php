@@ -15,7 +15,7 @@
 </form>
 <p></p> -->
 
-<form method="get" action="createacc.php">
+<form method="post" action="createacc.php">
 	<table>
 	<tr><td>Username</td><td><input type="text" name="username" size="15"></td></td>
 	<tr><td>Password</td><td><input type="password" name="password" size="15"></td></td>
@@ -34,13 +34,13 @@
 	error_reporting(E_ALL ^ E_WARNING); // do not report warnings
 	ini_set('display_errors', 1);
 	
-	if(!empty($_GET["username"]) && !empty($_GET["password"]) && !empty($_GET["email"]) && !empty($_GET["name"]) && !empty($_GET["date"])) {
+	if(!empty($_POST["username"]) && !empty($_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["name"]) && !empty($_POST["date"])) {
 		/* Read in parameters */
-		$username = $_GET["username"];
-		$password = $_GET["password"];
-		$email = $_GET["email"];
-		$name = $_GET["name"];
-		$date = $_GET["date"];
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$email = $_POST["email"];
+		$name = $_POST["name"];
+		$date = $_POST["date"];
 		
 		/* VALIDATION */
 		// username
@@ -64,7 +64,8 @@
 			return;
 		}
 		// date
-		if(strlen($date) > 10 || !preg_match("^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$",$date)) {
+		$dt = DateTime::createFromFormat("Y-m-d", $date);
+		if($dt == false || array_sum($dt->getLastErrors())) {
 			echo "<p>Invalid date! Format is YYYY-MM-DD.</p>";
 			return;
 		}
