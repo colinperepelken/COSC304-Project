@@ -31,7 +31,7 @@
 <?php
 	session_start();
 	
-	error_reporting(-1); // report all PHP errors 
+	error_reporting(E_ALL ^ E_WARNING); // do not report warnings
 	ini_set('display_errors', 1);
 	
 	if(!empty($_GET["username"]) && !empty($_GET["password"]) && !empty($_GET["email"]) && !empty($_GET["name"]) && !empty($_GET["date"])) {
@@ -41,6 +41,34 @@
 		$email = $_GET["email"];
 		$name = $_GET["name"];
 		$date = $_GET["date"];
+		
+		/* VALIDATION */
+		// username
+		if(strlen($username) > 12 || preg_match('/;/',$username)) {
+			echo "<p>Invalid username! Username must be <= 12 chars and not contain ';'</p>";
+			return;
+		}
+		// password
+		if(strlen($password) > 15 || preg_match('/;/',$password)) {
+			echo "<p>Invalid password! Password must be <= 15 chars and not contain ';'</p>";
+			return;
+		}
+		// email
+		if(strlen($email) > 254 || preg_match('/;/',$email) || !preg_match('/@/',$email) || !preg_match('/./',$email)) {
+			echo "<p>Invalid email! Please enter a valid email.</p>";
+			return;
+		}
+		// name
+		if(strlen($name) > 50 || preg_match('/;/',$name) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$name)) {
+			echo "<p>Invalid name! Please enter a valid name. No symbols. No more than 50 characters.</p>";
+			return;
+		}
+		// date
+		if(strlen($date) > 10 || !preg_match("^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$",$date)) {
+			echo "<p>Invalid date! Format is YYYY-MM-DD.</p>";
+			return;
+		}
+
 		
 		$sql = "INSERT INTO AccountHolder (username, password, email, name, birthDate) VALUES (?,?,?,?,?)";
 		
@@ -90,6 +118,8 @@
 			}
 		}
 		$conn->close();
+	} else {
+		echo "<p>Please enter all fields.</p>";
 	}
 ?>
 </center>
