@@ -1,11 +1,9 @@
 drop table AdminUser;
 drop table HasProduct;
-drop table Ticket;
 drop table Product;
 drop table ProductCategory;
 drop table Warehouse;
 drop table CustomerOrder;
-drop table UserSession;
 drop table AccountHolder;
 drop table ShippingOption;
 drop table PaymentMethod;

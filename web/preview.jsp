@@ -1,6 +1,8 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ include file="connection.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -10,13 +12,18 @@
 	<link rel="icon" href="images/favicon.png">
 
 	<script>
-		function addcart(pid, pname, cost) {
+		function addcart(pid, pname, cost, inventory, current) {
 			qty = document.getElementById('number').value;
 			if(!(qty=="" || qty==null)){
-				if(parseInt(qty) > 0 && parseInt(qty) <= 100)
-					window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + qty + "&cost=" + cost;
-				else
-					alert("Please enter a value between 1 and 100.")
+				//checks if quantity + current cart value is greater than inventory
+				if((parseInt(qty) + parseInt(current)) <= parseInt(inventory)){
+					if(parseInt(qty) > 0 && parseInt(qty) <= 100)
+						window.location.href ="addcart.jsp?pid=" + pid + "&pname=" + pname +"&qty=" + qty + "&cost=" + cost +"&inventory="+inventory;
+					else
+						alert("Please enter a value between 1 and 100.");
+				}else{
+					alert("We dont have that many!");
+				}
 			}
 		}
 	</script>
@@ -42,9 +49,16 @@
 		p = con.prepareStatement("SELECT pname, cost, description, image, inventory FROM Product WHERE pid = ?");
 		p.setString(1, pid);
 		ResultSet rst = p.executeQuery();
-		
+		HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");
+		int curAmount = 0;
 		while(rst.next()){
-			
+			//checks item quantity in the cart
+			if(itemList!=null){
+				if (itemList.containsKey(pid)){
+					ArrayList<Object> product =(ArrayList<Object>) itemList.get(pid);
+					curAmount = ((Integer) product.get(3)).intValue();
+				}
+			}
 			String pname = rst.getString(1);
 			Double cost = rst.getDouble(2);
 			String desc = rst.getString(3);
@@ -57,10 +71,10 @@
 			if(inventory <= 0){
 				out.println("<tr><td>Out of Stock</td><tr>");
 			}else{
-				out.println("<tr><td>" + currFormat.format(cost) + "</td><td>Stock: " + inventory + "</td></tr>");
+				out.println("<tr><td align='left'>" + currFormat.format(cost) + "</td><tr>");
 				// addcart as submit button, gets info from text box
-				out.println("<tr><td><input type='number' id='number' value='1' id='qty' size='1' min='1' max='100'>");
-				out.print("<input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\")\'></td></tr>");
+				out.println("<tr><td align='left'><input type='number' class='numberBox' id='number' value='1' id='qty' size='1' min='1' max='100'>  Stock: " + inventory + "</td></tr>");
+				out.println("<tr><td align='left'><input type='button' id='submit' value='Add to Cart' onclick=\'addcart(\""+pid+"\", \"" +pname+"\", \""+ cost+"\", \""+inventory+"\", \""+curAmount+"\")\'></td></tr>");
 			}
 			out.println("</table></td>");
 			out.println("</table>");

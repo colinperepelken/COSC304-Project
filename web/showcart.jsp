@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Map" %>
+<%@ include file="connection.jsp" %>
+
 
 <HTML>
 <HEAD>
@@ -41,7 +43,7 @@ ArrayList product = new ArrayList();
 String pid = request.getParameter("delete");
 String update = request.getParameter("update");
 String newqty = request.getParameter("newqty");
-
+int inventory= 0;
 // check if shopping cart is empty
 
 if (itemList == null){
@@ -62,12 +64,33 @@ else
 		}
 	}
 	
-	// if update isn't null, the user is trying to update the quantity
+	// if update isnt null, the user is trying to update the quantity
 	if(update != null && (!update.equals(""))) {
 		if (itemList.containsKey(update)) { // find item in shopping cart
 			product = (ArrayList) itemList.get(update);
-			if(new Integer(newqty)<=100 && new Integer(newqty)>0)
-				product.set(3, (new Integer(newqty))); // change quantity to new quantity
+			//get connection to check current inventory
+			try{
+				getConnection();
+				PreparedStatement pstmt = con.prepareStatement("SELECT inventory FROM Product WHERE pid=?");
+				pstmt.setInt(1, new Integer(update));
+				ResultSet rst = pstmt.executeQuery();
+				while(rst.next()){
+					inventory = rst.getInt(1);
+				}
+			}catch(SQLException e){
+				out.println(e);
+			}finally{
+				closeConnection();
+			}
+			//update quantity if valid
+			if(new Integer(newqty)<=100 && new Integer(newqty)>0){
+				if(new Integer(newqty) <= inventory)
+					product.set(3, (new Integer(newqty))); // change quantity to new quantity
+				else
+					out.println("<script>alert(\"We dont have that many!\");</script>");
+			}else{
+				out.println("<script>alert(\"Please enter a value between 1 and 100\");</script>");
+			}
 		}
 		else {
 			itemList.put(pid,product);

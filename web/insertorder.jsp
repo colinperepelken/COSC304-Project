@@ -60,8 +60,8 @@ try {
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 		//TODO: insert into hasproduct
 		
-		while (iterator.hasNext())
-		{ 	
+		while (iterator.hasNext()){ 
+			//update HasProduct table to include order
 			pstmt = con.prepareStatement("INSERT INTO HasProduct VALUES (?, ?, ?)");
 			Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 			ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
@@ -71,8 +71,14 @@ try {
 			pstmt.setInt(2, pid);
 			pstmt.setInt(3, qty);
 			pstmt.executeUpdate();
+			//update values in warehouse to reflect ordered product
+			pstmt = con.prepareStatement("UPDATE Product SET inventory = inventory - ? WHERE pid = ?");
+			pstmt.setInt(1, qty);
+			pstmt.setInt(2, pid);
+			pstmt.executeUpdate();
+			
 		}
-		//TODO: insert into customer order
+		//insert into customer order
 		sql = "UPDATE CustomerOrder SET orderDate=?, street=?,city=?,province=?,country=?,hasShipped=?,cartTotal=?,shippingType=?,shippingCost=?,paymentType=?,paymentCost=? WHERE oid = ? AND cid = ?";
 		pstmt = con.prepareStatement(sql);
 		//get current date
@@ -93,6 +99,7 @@ try {
 		pstmt.setDouble(11,payCost);
 		pstmt.setInt(12,orderId);
 		pstmt.setInt(13,cid);
+		//record order in db
 		pstmt.executeUpdate();
 		session.setAttribute("itemList", null);  
 		out.println("<h1><b>2Kyle16 thanks you for your order!</b></h1>");
