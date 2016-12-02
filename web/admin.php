@@ -32,9 +32,7 @@
 			//show form
 			echo "<br>
 					<p><span><a href=\"admin.php?reports='1'\">Generate Reports</a></span></p>
-					<br>
 					<p><span><a href=\"admin.php?add='1'\">Add a Product</a></span></p>
-					<br>
 					<p><span><a href=\"admin.php?delete='1'\">Delete a Product</a></span></p>
 					<br>";
 			
@@ -54,7 +52,7 @@
 			/* GENERATE REPORTS */
 			if(isset($_GET["reports"])) {
 				
-				echo "<h3>Sales Reports</h3>";
+				echo "<h1>Sales Reports</h1>";
 				/* ------------ TON OF QUERIES INCOMING -------------------*/
 				
 				/*  --Total Gross Revenue To Date-- */
@@ -189,13 +187,13 @@
 					// collect information for product to add
 					echo "<form method=\"get\" action=\"admin.php\">
 	<table>
-	<tr><td>Name</td><td><input type=\"text\" name=\"pname\" size=\"15\"></td></td>
-	<tr><td>Description</td><td><input type=\"text\" name=\"desc\" size=\"20\"></td></td>
-	<tr><td>Image</td><td><input type=\"text\" name=\"img\" size=\"20\"></td></td>
-	<tr><td>Cost</td><td><input type=\"text\" name=\"cost\" size=\"3\"></td></td>
-	<tr><td>Inventory</td><td><input type=\"text\" name=\"inv\" size=\"3\"></td></td>
-	<tr><td>WID</td><td><input type=\"text\" name=\"wid\" size=\"3\"></td></td>
-	<tr><td>CID</td><td><input type=\"text\" name=\"cid\" size=\"3\"></td></td>
+	<tr><td align =\"left\">Name:</td><td align =\"left\"><input type=\"text\" name=\"pname\" size=\"15\"></td></td>
+	<tr><td  align =\"left\">Description:</td><td  align =\"left\"><input type=\"text\" name=\"desc\" size=\"20\"></td></td>
+	<tr><td align =\"left\">Image URL:</td><td align =\"left\"><input type=\"text\" name=\"img\" size=\"20\"></td></td>
+	<tr><td align =\"left\">Cost:</td><td align =\"left\"><input type=\"text\" name=\"cost\" size=\"3\"></td></td>
+	<tr><td align =\"left\">Inventory:</td><td align =\"left\"><input type=\"text\" name=\"inv\" size=\"3\"></td></td>
+	<tr><td align =\"left\">WID:</td><td align =\"left\"><input type=\"text\" name=\"wid\" size=\"3\"></td></td>
+	<tr><td align =\"left\">CID:</td><td align =\"left\"><input type=\"text\" name=\"cid\" size=\"3\"></td></td>
 	</table>
 	<br><br>
 	<input type=\"submit\" name=\"submit\" value=\"Add Product\" id=\"submit\" />
