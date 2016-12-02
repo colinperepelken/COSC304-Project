@@ -60,7 +60,7 @@
 
 	$hasParam = false;
 	$query = "SELECT pid, pname, cost, image, inventory
-		      FROM Ticket";
+		      FROM Product WHERE categoryID=4";
 	
 
 

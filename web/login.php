@@ -44,7 +44,7 @@ session_start();
 		}
 	} else {
 		// not logged in, display login form
-		echo "<form method=\"get\" action=\"login.php\">
+		echo "<form method=\"post\" action=\"login.php\">
 	Username <input type=\"text\" name=\"username\" size=\"15\">
 	Password <input type=\"password\" name=\"password\" size=\"15\">
 	<input type=\"submit\" id=\"submit\" value=\"Login\">
@@ -55,10 +55,10 @@ session_start();
 		$_SESSION["last_page"] = $_SERVER['HTTP_REFERER'];
 		}
 	
-		if(isset($_GET["username"]) && isset($_GET["password"])) {
+		if(isset($_POST["username"]) && isset($_POST["password"])) {
 			/* Read in parameters */
-			$username = $_GET["username"];
-			$password = $_GET["password"];
+			$username = $_POST["username"];
+			$password = $_POST["password"];
 		
 			$query = "SELECT cid FROM AccountHolder WHERE username = ? AND password = ?";
 		
@@ -90,37 +90,18 @@ session_start();
 				}
 		
 				if($count == 1) {
-					// delete everythig from user session lol
-					$deletesql = "DELETE FROM UserSession;";
-					$stmt1 = $conn->prepare($deletesql);
-					if(!$stmt1->prepare($deletesql)) {
-						echo "Failed to prepare statement.";
-					} else {
-						$stmt1->execute();
-					}
-					
-					// then add into user session
-					$sql = "INSERT INTO UserSession(cid, referralURL) VALUES (?, ?);";//needs to update user session in db to store 
-					$stmt2 = $conn->prepare($sql);
-					if(!$stmt2->prepare($sql)) {
-						echo "Failed to prepare statement.";
-					} else {
-						$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
-						$stmt2->execute();
-					}
-					$stmt2->close();
 					
 					/* check if user is an admin */
 					$sql = "SELECT cid FROM AdminUser WHERE cid=?;";
-					$stmt2 = $conn->prepare($sql);
-					if(!$stmt2->prepare($sql)) {
+					$stmt = $conn->prepare($sql);
+					if(!$stmt->prepare($sql)) {
 						echo "Failed to prepare statement.";
 					} else {
-						$stmt2->bind_param("s", $cid);
-						$stmt2->execute();
+						$stmt->bind_param("s", $cid);
+						$stmt->execute();
 						
 						$count = 0;
-						while($stmt2->fetch()) {
+						while($stmt->fetch()) {
 							$count++;
 						}
 						

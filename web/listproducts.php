@@ -122,7 +122,7 @@
 		
 		$stmt->bind_result($pid, $cost, $pname, $image, $inventory); // bind result variables
 		
-		echo "<table><tr>";
+		echo "<table id=\"prod\"><tr>";
 		$count = 1;
 		while($stmt->fetch()) {
 			if($inventory=="0") {
