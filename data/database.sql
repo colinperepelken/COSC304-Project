@@ -72,16 +72,6 @@ CREATE TABLE Product (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Ticket (
-	pid INTEGER NOT NULL,
-	cost DECIMAL(10,2),
-	pname VARCHAR(50),
-	description VARCHAR(250),
-	image VARCHAR(100),
-	inventory INTEGER,
-	PRIMARY KEY (pid)
-);
-
 CREATE TABLE ShippingOption (
 	shippingType VARCHAR(13) CHECK (shippingType IN ('Express', 'Regular', 'International')), 
 	cost DECIMAL(10,2),
@@ -130,10 +120,4 @@ CREATE TABLE HasProduct (
 	FOREIGN KEY (pid) REFERENCES Product(pid)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
-);
-CREATE TABLE UserSession (
-	cid INTEGER NOT NULL,
-	referralURL VARCHAR(200),
-	PRIMARY KEY(cid),
-	FOREIGN KEY (cid) REFERENCES AccountHolder(cid)
 );

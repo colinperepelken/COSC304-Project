@@ -90,37 +90,18 @@ session_start();
 				}
 		
 				if($count == 1) {
-					// delete everythig from user session lol
-					$deletesql = "DELETE FROM UserSession;";
-					$stmt1 = $conn->prepare($deletesql);
-					if(!$stmt1->prepare($deletesql)) {
-						echo "Failed to prepare statement.";
-					} else {
-						$stmt1->execute();
-					}
-					
-					// then add into user session
-					$sql = "INSERT INTO UserSession(cid, referralURL) VALUES (?, ?);";//needs to update user session in db to store 
-					$stmt2 = $conn->prepare($sql);
-					if(!$stmt2->prepare($sql)) {
-						echo "Failed to prepare statement.";
-					} else {
-						$stmt2->bind_param("ss", $cid, $_SESSION["last_page"]);
-						$stmt2->execute();
-					}
-					$stmt2->close();
 					
 					/* check if user is an admin */
 					$sql = "SELECT cid FROM AdminUser WHERE cid=?;";
-					$stmt2 = $conn->prepare($sql);
-					if(!$stmt2->prepare($sql)) {
+					$stmt = $conn->prepare($sql);
+					if(!$stmt->prepare($sql)) {
 						echo "Failed to prepare statement.";
 					} else {
-						$stmt2->bind_param("s", $cid);
-						$stmt2->execute();
+						$stmt->bind_param("s", $cid);
+						$stmt->execute();
 						
 						$count = 0;
-						while($stmt2->fetch()) {
+						while($stmt->fetch()) {
 							$count++;
 						}
 						
