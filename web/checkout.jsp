@@ -12,11 +12,16 @@
 	<title>Checkout</title>
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
 	<link rel="icon" href="images/favicon.png">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
+	
 	function printState(country) {
 		var stateSelect = '';
 		if(country == "United States"){
-			stateSelect = '<select name="region" id="region" form="shipping" onchange="set(this.value)">'+
+			$('input[value="Regular"]').prop("disabled", true);
+			$('input[value="Express"]').prop("disabled", true);
+			$('input[value="International"]').prop("disabled", false);
+			stateSelect = '<select name="region" id="region" form="shipping" >'+
 			'<option value="AK">AK-Alaska</option>'+
 			'<option value="AL">AL-Alabama</option>'+
 			'<option value="AR">AR-Arkansas</option>'+
@@ -71,7 +76,10 @@
 			'</select>';
 		}
 		else if (country == 'Canada') {
-			stateSelect = '<select name="region" id="region" form="shipping" onchange="set(this.value)">' +
+			$('input[value="International"]').prop("disabled", true);
+			$('input[value="Regular"]').prop("disabled", false);
+			$('input[value="Express"]').prop("disabled", false);
+			stateSelect = '<select name="region" id="region" form="shipping" >' +
 			'<option value="AB">AB-Alberta</option>' +
 			'<option value="BC">BC-British Columbia</option>' +
 			'<option value="MB">MB-Manitoba</option>'+
@@ -87,18 +95,21 @@
 			'<option value="YT">YT-Yukon</option>'+
 			'</select>';
 		}
-		else {
+		else{ 
+			$('input[value="Regular"]').prop("disabled", false);
+			$('input[value="Express"]').prop("disabled", false);
+			$('input[value="International"]').prop("disabled", false);
 			stateSelect = '<select name="region" id="region" disabled="disable">'+
 			'<option value="Other">Select Province/State</option>'+
 			'</select>';
+			
 		}
 		document.getElementById('stateSelect').innerHTML = stateSelect;
-		
-	}
-	function set(region){
-		//document.getElementById('province').value= region;
+	
 	}
 
+
+	
 	</script>
 </head>
 <body>
@@ -159,7 +170,6 @@ try {
 		out.println("</select></td></tr>");
 		
 		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
-		//out.println("<input type='hidden' name='province'>");
 
 
 		
@@ -175,7 +185,7 @@ try {
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
-			out.println("<input name='shipType' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
+			out.println("<input name='shipType' class='shipmethod' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
 		}
 		out.println("</td><td align=\"left\">Payment Type:<br>");
 		while(pays.next()){
