@@ -13,13 +13,45 @@
 	<link href = "2kyle16.css" rel ="stylesheet" type ="text/css">
 	<link rel="icon" href="images/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
 	<script>
+
+	$(function(){
+		//validate form for input
+		$("#shipping").submit(function() {
+			if(($("input[name='country']:selected").val() == 'Other')){
+				alert("Please select your country.");
+				return false;
+			}else if(($("input[name='region']:selected").val() == 'Other')){
+				alert("Please select your state/province.");
+				return false;
+			}else if(!$("input[name='address']").val()){
+				alert("Please enter your address.");
+				return false;
+			}else if(!$("input[name='city']").val()){
+				alert("Please enter your city.");
+				return false;
+			}else if(!$("input[name='shipType']:checked").val()){
+				alert("Please select a shipping type.");
+				return false;
+			}else if(!$("input[name='payType']:checked").val()){
+				alert("Please select a payment type.");
+				return false;
+			}else{
+				return true;
+			}
+		});
+	});
+	
+		 
 	
 	function printState(country) {
 		var stateSelect = '';
 		if(country == "United States"){
 			$('input[value="Regular"]').prop("disabled", true);
 			$('input[value="Express"]').prop("disabled", true);
+			$('input[value="Regular"]').prop("checked", false);
+			$('input[value="Express"]').prop("checked", false);
 			$('input[value="International"]').prop("disabled", false);
 			stateSelect = '<select name="region" id="region" form="shipping" >'+
 			'<option value="AK">AK-Alaska</option>'+
@@ -77,6 +109,7 @@
 		}
 		else if (country == 'Canada') {
 			$('input[value="International"]').prop("disabled", true);
+			$('input[value="International"]').prop("checked", false);
 			$('input[value="Regular"]').prop("disabled", false);
 			$('input[value="Express"]').prop("disabled", false);
 			stateSelect = '<select name="region" id="region" form="shipping" >' +
@@ -99,7 +132,7 @@
 			$('input[value="Regular"]').prop("disabled", false);
 			$('input[value="Express"]').prop("disabled", false);
 			$('input[value="International"]').prop("disabled", false);
-			stateSelect = '<select name="region" id="region" disabled="disable">'+
+			stateSelect = '<select name="region" form="shipping" id="region" disabled="disable">'+
 			'<option value="Other">Select Province/State</option>'+
 			'</select>';
 			
@@ -162,19 +195,21 @@ try {
 		ResultSet pays = pstmt.executeQuery();
 		
 		out.println("<form id='shipping' action='finalize.jsp'>");
+		
+		
 		out.println("<tr><td><br><br>Enter your shipping address:<br><br>");
 		out.println("<tr><td align=\"left\">Country:</td></tr><tr><td align=\"left\"><select name='country' id='country' onchange='printState(this.value)'>");
-		out.println("<option value=\"Select\">Select a Country...</option>");
+		out.println("<option value=\"Other\">Select a Country...</option>");
 		out.println("<option value=\"Canada\">Canada</option>");
 		out.println("<option value=\"United States\">United States</option>");
 		out.println("</select></td></tr>");
 		
-		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
+		out.println("<tr><td align=\"left\">State/Province:</td></tr><tr><td align=\"left\"><p id=\"stateSelect\"><select name=\"region\" id=\"region\" form='shipping' disabled=\"disabled\"><option value=\"Other\">Select Region...</option></select></p>");
 
 
 		
-		out.println("Street:<br><input type='text' name='address'><br>");
-		out.println("City:<br><input type='text' name='city'><br><br></td></tr>");
+		out.println("Street:<br><input form='shipping' type='text' name='address'><br>");
+		out.println("City:<br><input form='shipping' type='text' name='city'><br><br></td></tr>");
 		
 		
 		
@@ -185,17 +220,18 @@ try {
 		while(ships.next()){
 			String type = ships.getString(1);
 			String cost = currFormat.format(ships.getDouble(2));
-			out.println("<input name='shipType' class='shipmethod' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
+			out.println("<input name='shipType' class='shipmethod' form='shipping' type='radio' value=\""+ type +"\">" + type + " - " + cost + "<br>");
 		}
 		out.println("</td><td align=\"left\">Payment Type:<br>");
 		while(pays.next()){
 			String type = pays.getString(1);
-			out.println("<input name='payType' type='radio' value=\""+ type +"\">" + type+"<br>");
+			out.println("<input name='payType' type='radio' form='shipping' value=\""+ type +"\">" + type+"<br>");
 		}
 		
 		out.println("</td></table>");
-		out.println("<br><br><input id='submit' type='submit' value='Confirm'>");
-		out.println("</form>");
+		
+		
+		out.println("<br><br><input form='shipping' id='submit' type='submit'  value='Confirm'></form>");
 
 		//button to go to next page, where info is then entered into database
 		
