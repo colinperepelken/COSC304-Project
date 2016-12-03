@@ -21,6 +21,14 @@
 <center>
 <%
 try {
+	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
+	if(session.getAttribute("username")==null){
+		out.println("<h1>You must be logged in to checkout.</h1>");
+	}else if(itemList!=null || itemList.isEmpty()){
+		out.println("<h1>Your shopping cart is empty.</h1>");
+
+	}else{
+	
 	getConnection();
 	//get parameters
 	String shipAddress = request.getParameter("address");
@@ -30,7 +38,6 @@ try {
 	String region = request.getParameter("region");
 	String city = request.getParameter("city");
 	
-	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 	PreparedStatement pstmt = null;
 	out.println("<h1>Place Order</h1><p>Please ensure the following information is correct.</p>");
 	
@@ -89,7 +96,7 @@ try {
 	out.println("<br><input id='submit' type='submit' value='Place Order'>");
 
 	out.println("</form>");
-
+	}
 	
 
 }catch(SQLException e){
