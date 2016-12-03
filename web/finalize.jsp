@@ -24,8 +24,11 @@ try {
 	HashMap<String, ArrayList<Object>> itemList = (HashMap<String, ArrayList<Object>>) session.getAttribute("itemList");	
 	if(session.getAttribute("username")==null){
 		out.println("<h1>You must be logged in to checkout.</h1>");
-	}else if(itemList!=null || itemList.isEmpty()){
-		out.println("<h1>Your shopping cart is empty.</h1>");
+	}else if(itemList==null || itemList.isEmpty()){
+		out.println("<script>window.location.href='showcart.jsp';</script>");
+	}else if(request.getParameter("city")==null ||	request.getParameter("city")==""){
+		out.println("<script>alert('You must go through the checkout.');window.location.href='checkout.jsp';</script>");
+
 
 	}else{
 	
