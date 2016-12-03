@@ -95,7 +95,14 @@ try {
 }catch(SQLException e){
 	out.println(e);
 }finally{
-	closeConnection();
+	try
+	{
+		closeConnection();
+	}
+	catch (SQLException ex)
+	{
+		out.println(ex); 
+	}
 }
 	
 %>                       				

@@ -236,12 +236,19 @@ try {
 		//button to go to next page, where info is then entered into database
 		
 	}else{
-		response.sendRedirect("login.php");//must be logged in to checkout
+		out.println("<script>alert('You must be logged in to checkout.');window.location.href='login.php';</script>");
 	}
 }catch(SQLException e){
 	out.println(e);
 }finally{
-	closeConnection();
+	try
+	{
+		closeConnection();
+	}
+	catch (SQLException ex)
+	{
+		out.println(ex); 
+	}
 }
 	
 %>                       				

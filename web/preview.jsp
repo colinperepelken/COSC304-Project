@@ -85,8 +85,13 @@
 	}catch(SQLException e){
 		out.println("Error: " + e);
 	}finally{
-		if(con!=null){
-			con.close();
+		try
+		{
+			closeConnection();
+		}
+		catch (SQLException ex)
+		{
+			out.println(ex); 
 		}
 	}
 	%>
