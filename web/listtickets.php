@@ -32,6 +32,11 @@
 	if(isset($_SESSION["cid"])) {
 		$username = $_SESSION["username"];
 		echo "Logged in as $username <span><a href=\"logout.php\">Logout</a></span>";
+		echo " -- <span><a href=\"orderstatus.jsp\">Check Order Status</a></span>";
+		$isAdmin = $_SESSION["isAdmin"];
+		if($isAdmin == "true") {
+			echo " -- <span><a href=\"admin.php\">Admin Controls</a></span>";
+		}
 	} else {
 		echo "Logged in as Guest";
 	}

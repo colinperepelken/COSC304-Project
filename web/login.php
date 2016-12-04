@@ -37,9 +37,10 @@ session_start();
 	if(isset($_SESSION["username"])) {
 		$username = $_SESSION["username"];
 		echo "<p>Already logged in as $username <span><a href=\"logout.php\">Logout</a></span></p>"; // user is already logged in
+		echo "<p><span><a href=\"orderstatus.jsp\">Check Order Status</a></span></p>";
 		if(isset($_SESSION["isAdmin"])) { // check if user is admin user
 			if($_SESSION["isAdmin"] == "true") {
-				echo "<br><span><a href=\"admin.php\">Admin Controls</a></span>";
+				echo "<span><a href=\"admin.php\">Admin Controls</a></span>";
 			}
 		}
 	} else {
