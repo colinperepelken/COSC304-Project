@@ -113,6 +113,7 @@ try {
 		pstmt.executeUpdate();
 		session.setAttribute("itemList", null);  
 		out.println("<h1><b>2Kyle16 thanks you for your order!</b></h1>");
+		out.println("<span><a href=\"orderstatus.jsp\">Check Order Status</a></span>");
 	}
 	}
 }catch(SQLException e){
