@@ -32,7 +32,7 @@ try {
 		ResultSet orders = pstmt.executeQuery();
 		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 		int count = 0;
-		out.println("<table width='50%'>");
+		out.println("<table width='600px'>");
 		out.println("<h1>Order History</h1>");
 		while (orders.next())//print order info
 		{	
@@ -42,23 +42,23 @@ try {
 			double payCost = orders.getDouble(13);
 			boolean hasShipped = orders.getBoolean("hasShipped");
 			String status = (hasShipped ? "Shipped":"Processing");
-			out.println("<tr><td style='text-align:left'><b>Order Id: </b>" + oid + "<br>Order Total: " + currFormat.format(payCost) + "<br>Shipping Status: " + status + "</td>");
+			out.println("<tr><td style='text-align:left;vertical-align:top' width='200px'><b>Order Id: </b>" + oid + "<br>Order Total: " + currFormat.format(payCost) + "<br>Shipping Status: " + status + "</td>");
 			
 			pstmt = con.prepareStatement("SELECT p.pname as name, h.quantity as qty FROM HasProduct h, Product p WHERE h.oid=? AND p.pid = h.pid");
 			pstmt.setInt(1, oid);
 			ResultSet products = pstmt.executeQuery();
 			//print out the products in the order
 			//print out the products in the order
-			out.println("<td><table><tr><th align='left' >Product</th><th align='left'>Quantity</th></tr>");
+			out.println("<td width='200px'><table><tr><th align='left' >Product</th><th align='left'>Quantity</th></tr>");
 			while(products.next()){
 				String name = products.getString("name");
 				int qty = products.getInt("qty");
-				out.println("<tr><td align='left'>" + name + "</td><td align='left'>" + qty+ "</td></tr>");
+				out.println("<tr><td align='left' width='200px'>" + name + "</td><td align='left'>" + qty+ "</td></tr>");
 
 				
 				
 			}
-			out.println("</table></td></tr>");
+			out.println("</table><br><br></td></tr>");
 			
 		}
 		out.println("</table>");
